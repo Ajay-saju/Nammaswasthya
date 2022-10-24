@@ -1,0 +1,382 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:get/get_connect/sockets/src/sockets_io.dart';
+import 'package:get/get_utils/get_utils.dart';
+import 'package:swasthya/main.dart';
+
+import '../core/colors.dart';
+import '../core/constent_size.dart';
+import 'card_screen_controller.dart';
+
+class AllCardScreen extends StatelessWidget {
+  AllCardScreen({super.key});
+
+  final allCardController = Get.put(CardScreenController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(55),
+        child: AppBar(
+          centerTitle: true,
+          titleSpacing: 20,
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+                size: 40,
+              ),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 18),
+            child: Text('Premium Cards',
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w800)),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              h2,
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 20),
+              //   child: Row(
+              //     children: [
+              //       InkWell(
+              //         onTap: () {
+              //           Get.back();
+              //         },
+              //         child: Icon(
+              //           Icons.arrow_back,
+              //           color: Colors.black,
+              //           size: 40,
+              //         ),
+              //       ),
+              //       SizedBox(
+              //         width: 15,
+              //       ),
+              //       Text('Premium Cards',
+              //           style: TextStyle(
+              //               fontSize: 25,
+              //               color: Colors.black,
+              //               fontWeight: FontWeight.w800)),
+              //     ],
+              //   ),
+              // ),
+              // Text('Premium Cards',
+              //     style: TextStyle(
+              //         fontSize: 21,
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w800)),
+              h2, h1,
+              Obx(() => allCardController.getallCardsModel.value.data == null
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Column(
+                      children: [
+                        Container(
+                          height: 197,
+                          width: context.width * .8,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(allCardController
+                                      .getallCardsModel.value.data![0].cardImage
+                                      .toString())),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10)),
+                              border: Border.all(width: 1.5, color: appColor)),
+                        ),
+                        Container(
+                          height: 108,
+                          width: context.width * .8,
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 1.5, color: appColor),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10))),
+                          child: Column(
+                            children: [
+                              h1,
+                              Text(
+                                  allCardController
+                                      .getallCardsModel.value.data![0].cardCost
+                                      .toString(),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w800)),
+                              h1,
+                              ElevatedButton(
+                                  onPressed: () async {
+                                    allCardController.checkOut(allCardController
+                                        .getallCardsModel
+                                        .value
+                                        .data![0]
+                                        .cardCost!
+                                        .replaceAll(',', '')
+                                        .toString());
+                                    allCardController.getCurrentCardDetails(
+                                        allCardController.getallCardsModel.value
+                                            .data![0].cardType
+                                            .toString(),
+                                        allCardController.getallCardsModel.value
+                                            .data![0].cardCost
+                                            .toString());
+                                    print(prefer.getString("id").toString());
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      fixedSize: Size(100, 20),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      backgroundColor: appColor),
+                                  child: Text('Buy Now'))
+                            ],
+                          ),
+                        )
+                      ],
+                    )),
+
+              h2,
+              Obx(() => Column(
+                    children: [
+                      Container(
+                        height: 197,
+                        width: context.width * .8,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(allCardController
+                                    .getallCardsModel.value.data![1].cardImage
+                                    .toString())),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            border: Border.all(width: 1.5, color: appColor)),
+                      ),
+                      Container(
+                        height: 108,
+                        width: context.width * .8,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1.5, color: appColor),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10))),
+                        child: Column(
+                          children: [
+                            h1,
+                            Text(
+                                allCardController
+                                    .getallCardsModel.value.data![1].cardCost
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800)),
+                            h1,
+                            ElevatedButton(
+                                onPressed: () {
+                                  allCardController.checkOut(allCardController
+                                      .getallCardsModel.value.data![1].cardCost!
+                                      .replaceAll(',', '')
+                                      .toString());
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(100, 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)),
+                                    backgroundColor: appColor),
+                                child: Text('Buy Now'))
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+              h2,
+              Obx(() => Column(
+                    children: [
+                      Container(
+                        height: 197,
+                        width: context.width * .8,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(allCardController
+                                    .getallCardsModel.value.data![2].cardImage
+                                    .toString())),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            border: Border.all(width: 1.5, color: appColor)),
+                      ),
+                      Container(
+                        height: 108,
+                        width: context.width * .8,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1.5, color: appColor),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10))),
+                        child: Column(
+                          children: [
+                            h1,
+                            Text(
+                                allCardController
+                                    .getallCardsModel.value.data![2].cardCost
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800)),
+                            h1,
+                            ElevatedButton(
+                                onPressed: () {
+                                  allCardController.checkOut(allCardController
+                                      .getallCardsModel.value.data![2].cardCost!
+                                      .replaceAll(',', '')
+                                      .toString());
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(100, 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)),
+                                    backgroundColor: appColor),
+                                child: Text('Buy Now'))
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+              h2,
+              Obx(() => Column(
+                    children: [
+                      Container(
+                        height: 197,
+                        width: context.width * .8,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(allCardController
+                                    .getallCardsModel.value.data![3].cardImage
+                                    .toString())),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            border: Border.all(width: 1.5, color: appColor)),
+                      ),
+                      Container(
+                        height: 108,
+                        width: context.width * .8,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1.5, color: appColor),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10))),
+                        child: Column(
+                          children: [
+                            h1,
+                            Text(
+                                allCardController
+                                    .getallCardsModel.value.data![3].cardCost
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800)),
+                            h1,
+                            ElevatedButton(
+                                onPressed: () {
+                                  allCardController.checkOut(allCardController
+                                      .getallCardsModel.value.data![3].cardCost!
+                                      .replaceAll(',', '')
+                                      .toString());
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(100, 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)),
+                                    backgroundColor: appColor),
+                                child: Text('Buy Now'))
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+              h2,
+              Obx(() => Column(
+                    children: [
+                      Container(
+                        height: 197,
+                        width: context.width * .8,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(allCardController
+                                    .getallCardsModel.value.data![4].cardImage
+                                    .toString())),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            border: Border.all(width: 1.5, color: appColor)),
+                      ),
+                      Container(
+                        height: 108,
+                        width: context.width * .8,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1.5, color: appColor),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10))),
+                        child: Column(
+                          children: [
+                            h1,
+                            Text(
+                                allCardController
+                                    .getallCardsModel.value.data![4].cardCost
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800)),
+                            h1,
+                            ElevatedButton(
+                                onPressed: () {
+                                  allCardController.checkOut(allCardController
+                                      .getallCardsModel.value.data![4].cardCost!
+                                      .replaceAll(',', '')
+                                      .toString());
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: Size(100, 20),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)),
+                                    backgroundColor: appColor),
+                                child: Text('Buy Now'))
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+              h5,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

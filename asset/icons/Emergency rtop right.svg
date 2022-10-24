@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="39" viewBox="0 0 38 39">
+  <g id="Emergency_rtop_right" data-name="Emergency rtop right" transform="translate(-353 -19)">
+    <g id="Rectangle_45" data-name="Rectangle 45" transform="translate(353 19)" fill="#fff" stroke="red" stroke-width="4">
+      <rect width="38" height="39" rx="7" stroke="none"/>
+      <rect x="2" y="2" width="34" height="35" rx="5" fill="none"/>
+    </g>
+    <line id="Line_14" data-name="Line 14" y2="20.111" transform="translate(372.352 28.296)" fill="none" stroke="red" stroke-linecap="round" stroke-width="4"/>
+    <line id="Line_15" data-name="Line 15" x2="20.463" transform="translate(362.12 38.352)" fill="none" stroke="red" stroke-linecap="round" stroke-width="4"/>
+  </g>
+</svg>

@@ -1,0 +1,49 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/route_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swasthya/view/update_user_pro_pick/update_profile_pick_controller.dart';
+
+import 'view/bottom_navigation_bar/navigation_screen.dart';
+import 'view/splash_screen/spashscreen.dart';
+
+late SharedPreferences prefer;
+
+void main() async {
+  Future.delayed(Duration(seconds: 7), () async {
+    WidgetsFlutterBinding.ensureInitialized();
+    prefer = await SharedPreferences.getInstance();
+
+    runApp(const MyApp());
+  });
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    precacheImage(
+        Image(image: AssetImage('asset/images/namma swasthya logo m.png'))
+            .image,
+        context);
+    final login = prefer.getString("id");
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: SpalshScreen(),
+      // home: login == null || login.isEmpty
+      //     ? SpalshScreen()
+      //     : BottumNavBarScreen()
+    );
+  }
+}

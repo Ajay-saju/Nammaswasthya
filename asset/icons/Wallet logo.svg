@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="53" height="47" viewBox="0 0 53 47">
+  <g id="Wallet_logo" data-name="Wallet logo" transform="translate(-330 -466)">
+    <rect id="Rectangle_50" data-name="Rectangle 50" width="40" height="23" rx="7" transform="translate(339 490)" fill="#f08000"/>
+    <rect id="Rectangle_49" data-name="Rectangle 49" width="31" height="18" rx="5" transform="translate(330 466)" fill="#f08000"/>
+    <g id="Rectangle_51" data-name="Rectangle 51" transform="translate(369 495)" fill="#f08000" stroke="#fff" stroke-width="1">
+      <rect width="14" height="14" rx="5" stroke="none"/>
+      <rect x="0.5" y="0.5" width="13" height="13" rx="4.5" fill="none"/>
+    </g>
+    <g id="Group_6" data-name="Group 6" transform="translate(340.554 470.003)">
+      <line id="Line_21" data-name="Line 21" x2="8.735" transform="translate(0)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <line id="Line_22" data-name="Line 22" x2="8.735" transform="translate(0 3.639)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <path id="Path_2" data-name="Path 2" d="M1580.408,1894.5s2.082,3.16.877,3.525-.657,1.9-.657,1.9h-2.666l3.773,3.444.828.756" transform="translate(-1576.17 -1894.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <circle id="Ellipse_11" data-name="Ellipse 11" cx="1.5" cy="1.5" r="1.5" transform="translate(31.446 29.997)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

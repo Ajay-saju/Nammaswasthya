@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:swasthya/main.dart';
 
-
+import '../bottom_navigation_bar/navigation_screen.dart';
 import '../home_screen/home_screen.dart';
 
 class SpalshScreen extends StatefulWidget {
@@ -28,10 +29,14 @@ class _SpalshScreenState extends State<SpalshScreen> {
       height: 100,
     );
     image2 = SvgPicture.asset('asset/icons/logo only.svg');
-    // title=
 
-    Timer(const Duration(seconds: 5),
-        () => Get.to(const PhoneNumberVerificationScreen()));
+    Timer(Duration(seconds: 3), () {
+      if (prefer.getString('id') == null) {
+        Get.to(const PhoneNumberVerificationScreen());
+      } else {
+        Get.to(BottumNavBarScreen());
+      }
+    });
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:get/get.dart';
@@ -13,14 +14,25 @@ ProfileScreenController controller = Get.find();
 class ProfilePickController extends GetxController {
   final ImagePicker picker = ImagePicker();
 
-  var image =
-      controller.getUserProfileDetails.value.data!.profilePic.toString().obs;
+  String image() {
+    print(controller.getUserProfileDetails.value.data!.profilePic
+        .toString()
+        .obs
+        .toString());
+    return controller.getUserProfileDetails.value.data!.profilePic.obs
+        .toString();
+  }
+
   var fileImage = ''.obs;
 
   imageFromGallery() async {
-    final fImage = await picker.pickImage(source: ImageSource.gallery);
+    final fImage = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50,
+        maxHeight: 500,
+        maxWidth: 500);
     fileImage.value = fImage!.path;
-
+    print("from_gallery:${fImage.path}");
     print('Workinggggggg');
     update();
   }
@@ -28,39 +40,50 @@ class ProfilePickController extends GetxController {
   imageFromCamara() async {
     final fImage = await picker.pickImage(source: ImageSource.camera);
     fileImage.value = fImage!.path;
-    print('Workinggggggg');
+    print("from_camera:${fImage.path}");
     update();
   }
 
   uploadProfilePick() async {
     final updateUserProfilePickService = UpdateUserProfilePickService();
+    print(fileImage.value);
 
     File image = File(fileImage.value);
 
+    // List<int> imageBytes = image.readAsBytesSync();
+    // String baseImage = base64Encode(imageBytes);
+
+    // print(baseImage.toString());
+    // print('-------------------------------------------------------');
+
+    print(image.path.toString());
+
     String fileName = image.path.split('/').last;
+
+    // print('-------------------------------------------------------');
+
+    // print(fileName.toString());
 
     di.FormData form = di.FormData.fromMap({
       "user_id": prefer.getString('id').toString(),
-      "profile":
-          await di.MultipartFile.fromFile(image.path, filename: fileName),
+      "profile": await di.MultipartFile.fromFile(
+        image.path,
+        filename: fileName,
+      )   
     });
 
     try {
-
       var response = await updateUserProfilePickService.uploadImage(form);
 
-       print("printing_res${response.toString()}");
-      
-      var jsonFile = jsonDecode(response.data);
-      if (jsonFile["status"] == "success")
+      print("printing_res${response.toString()}");
+
+      // var jsonFile = jsonDecode(response.data);
+      // log(jsonFile);
+      print(response.statusCode.toString());
+      if (response.statusCode == 200)
         Get.defaultDialog(
-            title: 'Success', middleText: 'Update your profile successfully');
-      
-    } catch (e) {
-      
-    }
-
-    
-
+            title: response.data["status"],
+            middleText: response.data["message"]);
+    } catch (e) {}
   }
 }

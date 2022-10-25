@@ -73,7 +73,7 @@ class PhoneNumberVerificationScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Container(
-                width: 340,
+                width: context.width*.9,
                 height: 50,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),

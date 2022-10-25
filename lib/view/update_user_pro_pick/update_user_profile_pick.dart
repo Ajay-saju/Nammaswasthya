@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:swasthya/view/bottom_navigation_bar/navigation_screen.dart';
+import 'package:swasthya/view/dashboard_screen/dashboard_screen.dart';
 import 'package:swasthya/view/update_user_pro_pick/update_profile_pick_controller.dart';
 
 import '../core/colors.dart';
@@ -26,8 +28,8 @@ class _UpdateUserProfilePictureScreenState
     if (pcontroller.fileImage.value != '')
       return Image.file(File(pcontroller.fileImage.value));
 
-    if (pcontroller.image.value != '')
-      return Image.network(pcontroller.fileImage.value);
+    if (pcontroller.image() != '')
+      return Image.network(pcontroller.image());
     else
       return Image.asset('asset/images/profile.png');
   }
@@ -75,6 +77,7 @@ class _UpdateUserProfilePictureScreenState
                       child: ElevatedButton(
                         onPressed: () async {
                           pcontroller.imageFromGallery();
+                          Get.back();
                         },
                         child: Text(
                           'Gallery',
@@ -94,6 +97,7 @@ class _UpdateUserProfilePictureScreenState
                       child: ElevatedButton(
                         onPressed: () async {
                           pcontroller.imageFromCamara();
+                          Get.back();
                         },
                         child: Text(
                           'Camara',
@@ -149,7 +153,7 @@ class _UpdateUserProfilePictureScreenState
               ElevatedButton(
                 onPressed: () async {
                   await pcontroller.uploadProfilePick();
-                  Get.back();
+                  Get.off(BottumNavBarScreen());
                 },
                 child: Text(
                   'Upload',

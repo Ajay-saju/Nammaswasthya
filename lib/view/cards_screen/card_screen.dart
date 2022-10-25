@@ -136,7 +136,7 @@ class AllCardScreen extends StatelessWidget {
                                         .toString());
                                     allCardController.getCurrentCardDetails(
                                         allCardController.getallCardsModel.value
-                                            .data![0].cardType
+                                            .data![0].id
                                             .toString(),
                                         allCardController.getallCardsModel.value
                                             .data![0].cardCost
@@ -165,8 +165,12 @@ class AllCardScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(allCardController
-                                    .getallCardsModel.value.data![1].cardImage
-                                    .toString())),
+                                            .getallCardsModel.value.data ==
+                                        null
+                                    ? ''
+                                    : allCardController.getallCardsModel.value
+                                        .data![1].cardImage
+                                        .toString())),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10)),
@@ -219,8 +223,12 @@ class AllCardScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(allCardController
-                                    .getallCardsModel.value.data![2].cardImage
-                                    .toString())),
+                                            .getallCardsModel.value.data ==
+                                        null
+                                    ? ''
+                                    : allCardController.getallCardsModel.value
+                                        .data![2].cardImage
+                                        .toString())),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10)),
@@ -238,9 +246,12 @@ class AllCardScreen extends StatelessWidget {
                           children: [
                             h1,
                             Text(
-                                allCardController
-                                    .getallCardsModel.value.data![2].cardCost
-                                    .toString(),
+                                allCardController.getallCardsModel.value.data ==
+                                        null
+                                    ? ''
+                                    : allCardController.getallCardsModel.value
+                                        .data![2].cardCost
+                                        .toString(),
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
@@ -273,8 +284,12 @@ class AllCardScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(allCardController
-                                    .getallCardsModel.value.data![3].cardImage
-                                    .toString())),
+                                            .getallCardsModel.value.data ==
+                                        ''
+                                    ? ''
+                                    : allCardController.getallCardsModel.value
+                                        .data![3].cardImage
+                                        .toString())),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10)),
@@ -327,8 +342,12 @@ class AllCardScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(allCardController
-                                    .getallCardsModel.value.data![4].cardImage
-                                    .toString())),
+                                            .getallCardsModel.value.data ==
+                                        ''
+                                    ? ''
+                                    : allCardController.getallCardsModel.value
+                                        .data![4].cardImage
+                                        .toString())),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10)),

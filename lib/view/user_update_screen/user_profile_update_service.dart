@@ -7,7 +7,7 @@ class UserProfileUpdateService {
   final dio = Dio(BaseOptions(
       baseUrl: orginalApis.baseUrl, responseType: ResponseType.plain));
 
-  Future<Response> updateUserdata(FormData form) async {
+  Future<Response> updateUserdata(Map<String,dynamic> form) async {
     try {
       print(form.toString());
       print(orginalApis.baseUrl+"update_profile");

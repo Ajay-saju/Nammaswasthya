@@ -8,15 +8,18 @@ import '../add_medical_details/sdd_medicall_details_controller.dart';
 import '../bottom_navigation_bar/navigation_screen.dart';
 import '../core/colors.dart';
 import '../core/constent_size.dart';
+import '../profile_screen/profile_screen_controller.dart';
 
 class UpdateMedicalDetails extends StatelessWidget {
   String postId;
+  int index;
   UpdateMedicalDetails({
     Key? key,
-    required this.postId,
+    required this.postId,required this.index
   }) : super(key: key);
 
-  AddMedicalDetailsController oldData = Get.find();
+  ProfileScreenController oldData = Get.find();
+
   final updateMedDataController = Get.put(UpdateMedDataController());
 
   @override
@@ -50,7 +53,7 @@ class UpdateMedicalDetails extends StatelessWidget {
               SizedBox(
                 height: 200,
                 child: TextFormField(
-                  initialValue: oldData.description,
+                  initialValue: oldData.getMedicalDetails.value.data![index].description,
                   onChanged: (value) {
                     updateMedDataController.description=value;
                   },
@@ -90,7 +93,7 @@ class UpdateMedicalDetails extends StatelessWidget {
               ),
               h2,
               TextFormField(
-                initialValue: oldData.date,
+                initialValue: oldData.getMedicalDetails.value.data![index].date,
                 onChanged: (value) {
                   updateMedDataController.date=value;
                 },

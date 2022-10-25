@@ -32,9 +32,7 @@ class DashBordController extends GetxController {
 
       userDetailsModel = UserDetailsModel.fromJson(jsonFile);
 
-      await prefer.setString(
-          'pick', userDetailsModel!.data!.profilePic.toString());
-
+      
       print(prefer.getString('pick'));
 
       user_profilePick = userDetailsModel!.data!.profilePic.toString().obs;

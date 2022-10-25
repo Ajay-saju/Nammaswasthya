@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:swasthya/view/otp_verification_screen/otp_verification_controller.dart';
 import '../core/colors.dart';
 import '../core/constent_size.dart';
+import '../home_screen/phone_no_verification_controller.dart';
 
 class OtpVerificationScreen extends StatelessWidget {
   final String enterdPhoneNumber;
@@ -13,6 +14,7 @@ class OtpVerificationScreen extends StatelessWidget {
     required this.enterdPhoneNumber,
     required this.otp,
   });
+  PhoneNoVerificationController phoneNoVerificationController =Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +102,17 @@ class OtpVerificationScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     fontSize: 14)),
             h1,
-            Text('Resend OTP in ',
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14)),
+            InkWell(
+              onTap: (){
+                // phoneNoVerificationController.getHttp();
+
+              },
+              child: Text('Resend OTP in ',
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14)),
+            ),
             h2,
             h1,
             ElevatedButton(

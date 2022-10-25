@@ -11,9 +11,9 @@ import '../core/constent_size.dart';
 import '../profile_screen/profile_screen_controller.dart';
 
 class AddMedicalDetailsScreen extends StatelessWidget {
-  AddMedicalDetailsScreen({super.key});
+  AddMedicalDetailsScreen({super.key, int? index});
 
-  final medicalDetailsScreenController = Get.put(AddMedicalDetailsController());
+  AddMedicalDetailsController medicalDetailsScreenController = Get.find();
   ProfileScreenController proScreenController = Get.find();
 
   @override
@@ -47,6 +47,7 @@ class AddMedicalDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: 200,
                 child: TextFormField(
+                  // initialValue:proScreenController.getMedicalDetails.value.data[index].description.toString() ,
                   onChanged: (value) {
                     medicalDetailsScreenController.description = value;
                   },
@@ -125,7 +126,6 @@ class AddMedicalDetailsScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   medicalDetailsScreenController.getFile();
-                   
                 },
                 child: Text(
                   'Add File',

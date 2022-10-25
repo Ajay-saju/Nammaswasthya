@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:swasthya/main.dart';
+import 'package:swasthya/view/bottom_navigation_bar/navigation_screen.dart';
 import 'package:swasthya/view/cards_screen/get_all_card_model.dart';
 import 'package:swasthya/view/cards_screen/subscrition_details_service.dart';
 
@@ -73,6 +75,14 @@ class CardScreenController extends GetxController {
 
     Get.defaultDialog(
         title: 'Payment Success', titleStyle: TextStyle(color: Colors.green));
+
+        
+        Timer(Duration(seconds: 2), (){
+          Get.off(BottumNavBarScreen());
+
+        });
+
+        
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

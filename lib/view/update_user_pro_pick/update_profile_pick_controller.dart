@@ -38,10 +38,14 @@ class ProfilePickController extends GetxController {
   }
 
   imageFromCamara() async {
-    final fImage = await picker.pickImage(source: ImageSource.camera);
+    final XFile? fImage = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 50,
+        maxHeight: 500,
+        maxWidth: 500);
     fileImage.value = fImage!.path;
     print("from_camera:${fImage.path}");
-    update();
+    // update();
   }
 
   uploadProfilePick() async {
@@ -69,7 +73,7 @@ class ProfilePickController extends GetxController {
       "profile": await di.MultipartFile.fromFile(
         image.path,
         filename: fileName,
-      )   
+      )
     });
 
     try {

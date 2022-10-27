@@ -23,7 +23,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin {
   final profileScreenController = Get.put(ProfileScreenController());
-   final medicalDetailsScreenController = Get.put(AddMedicalDetailsController());
+  final medicalDetailsScreenController = Get.put(AddMedicalDetailsController());
   DashBordController cardController = Get.find();
   @override
   void initState() {
@@ -162,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       //             letterSpacing: 1.2,
                       //             fontWeight: FontWeight.w600),
                       //       ),
-                
+
                       //       // Text('B+')
                       //     ],
                       //   ),
@@ -229,7 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   borderRadius: BorderRadius.circular(30)),
                               controller: tabController,
                               // labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                
+
                               tabs: [
                                 Tab(
                                   // height: 20,
@@ -307,7 +307,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         controller: tabController,
                         children: [
                           SingleChildScrollView(
-                            child: Column( 
+                            child: Column(
                               children: [
                                 h2,
                                 Container(
@@ -319,8 +319,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           color: Colors.grey.withOpacity(0.1),
                                           spreadRadius: 1,
                                           blurRadius: 1,
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8.5),
@@ -330,8 +330,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     padding:
                                         const EdgeInsets.only(left: 12, top: 8),
                                     child: Text(
-                                      profileScreenController.getUserProfileDetails
-                                                  .value.data!.email ==
+                                      profileScreenController
+                                                  .getUserProfileDetails
+                                                  .value
+                                                  .data!
+                                                  .email ==
                                               null
                                           ? "example@gamil.com"
                                           : profileScreenController
@@ -358,8 +361,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           color: Colors.grey.withOpacity(0.1),
                                           spreadRadius: 1,
                                           blurRadius: 1,
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8.5),
@@ -369,12 +372,18 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     padding:
                                         const EdgeInsets.only(left: 12, top: 8),
                                     child: Text(
-                                      profileScreenController.getUserProfileDetails
-                                                  .value.data!.dob ==
+                                      profileScreenController
+                                                  .getUserProfileDetails
+                                                  .value
+                                                  .data!
+                                                  .dob ==
                                               null
                                           ? "XX/XX/XXX"
                                           : profileScreenController
-                                              .getUserProfileDetails.value.data!.dob
+                                              .getUserProfileDetails
+                                              .value
+                                              .data!
+                                              .dob
                                               .toString(),
                                       style: TextStyle(
                                           fontSize: 18,
@@ -394,8 +403,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           color: Colors.grey.withOpacity(0.1),
                                           spreadRadius: 1,
                                           blurRadius: 1,
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8.5),
@@ -405,8 +414,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     padding:
                                         const EdgeInsets.only(left: 12, top: 8),
                                     child: Text(
-                                      profileScreenController.getUserProfileDetails
-                                                  .value.data!.gender ==
+                                      profileScreenController
+                                                  .getUserProfileDetails
+                                                  .value
+                                                  .data!
+                                                  .gender ==
                                               null
                                           ? "Gender"
                                           : profileScreenController
@@ -433,8 +445,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           color: Colors.grey.withOpacity(0.1),
                                           spreadRadius: 1,
                                           blurRadius: 1,
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8.5),
@@ -444,8 +456,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     padding:
                                         const EdgeInsets.only(left: 12, top: 8),
                                     child: Text(
-                                      profileScreenController.getUserProfileDetails
-                                                  .value.data!.occupation ==
+                                      profileScreenController
+                                                  .getUserProfileDetails
+                                                  .value
+                                                  .data!
+                                                  .occupation ==
                                               null
                                           ? "Occupation - Nill"
                                           : profileScreenController
@@ -472,8 +487,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           color: Colors.grey.withOpacity(0.1),
                                           spreadRadius: 1,
                                           blurRadius: 1,
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8.5),
@@ -483,8 +498,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     padding:
                                         const EdgeInsets.only(left: 12, top: 8),
                                     child: Text(
-                                      profileScreenController.getUserProfileDetails
-                                                  .value.data!.state ==
+                                      profileScreenController
+                                                  .getUserProfileDetails
+                                                  .value
+                                                  .data!
+                                                  .state ==
                                               ""
                                           ? "State"
                                           : profileScreenController
@@ -511,8 +529,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           color: Colors.grey.withOpacity(0.1),
                                           spreadRadius: 1,
                                           blurRadius: 1,
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8.5),
@@ -522,8 +540,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     padding:
                                         const EdgeInsets.only(left: 12, top: 8),
                                     child: Text(
-                                      profileScreenController.getUserProfileDetails
-                                                  .value.data!.city ==
+                                      profileScreenController
+                                                  .getUserProfileDetails
+                                                  .value
+                                                  .data!
+                                                  .city ==
                                               ""
                                           ? "City"
                                           : profileScreenController
@@ -550,8 +571,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           color: Colors.grey.withOpacity(0.1),
                                           spreadRadius: 1,
                                           blurRadius: 1,
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8.5),
@@ -561,8 +582,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     padding:
                                         const EdgeInsets.only(left: 12, top: 8),
                                     child: Text(
-                                      profileScreenController.getUserProfileDetails
-                                                  .value.data!.pincode ==
+                                      profileScreenController
+                                                  .getUserProfileDetails
+                                                  .value
+                                                  .data!
+                                                  .pincode ==
                                               ""
                                           ? "Pincode"
                                           : profileScreenController
@@ -595,13 +619,15 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   style: ElevatedButton.styleFrom(
                                       fixedSize: Size(180, 45),
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(30)),
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
                                       backgroundColor: Colors.green),
                                 )
                               ],
                             ),
                           ),
-                          profileScreenController.getMedicalDetails.value.data ==
+                          profileScreenController
+                                      .getMedicalDetails.value.data ==
                                   null
                               ? Center(
                                   child: ElevatedButton(
@@ -625,122 +651,89 @@ class _ProfileScreenState extends State<ProfileScreen>
                               : Column(
                                   children: [
                                     Expanded(
-                                      
-                                      
-                    
-                                      child: ListView.builder(
-                                        physics: BouncingScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount: profileScreenController
-                                            .getMedicalDetails.value.data!.length,
-                                        itemBuilder: (context, index) => SizedBox(
-                                          child: Column(
-                                            children: [
-                                              h2,
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 20),
-                                                child: Container(
-                                                  height: 360,
-                                                  width: context.width * 8,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 2,
-                                                          color: appColor)),
-                                                  child: Column(
-                                                    children: [
-                                                      h2,
-                                                      Container(
-                                                        height: 150,
-                                                        width:
-                                                            context.width * 0.7,
-                                                        decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                                color:
-                                                                    Colors.black,
-                                                                width: 1)),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(5.0),
-                                                          child: Text(
-                                                            profileScreenController
-                                                                        .getMedicalDetails
-                                                                        .value
-                                                                        .data![
-                                                                            index]
-                                                                        .description ==
-                                                                    null
-                                                                ? 'Petient last medical history'
-                                                                : profileScreenController
-                                                                    .getMedicalDetails
-                                                                    .value
-                                                                    .data![index]
-                                                                    .description
-                                                                    .toString(),
-                                                            style: TextStyle(
-                                                                fontSize: 14,
-                                                                // letterSpacing: 1.2,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
+                                      child: RefreshIndicator(
+                                        displacement: 250,
+                                        backgroundColor: Colors.grey,
+                                        color: appColor,
+                                        strokeWidth: 3,
+                                        triggerMode:
+                                            RefreshIndicatorTriggerMode.anywhere,
+                                        onRefresh: () async {
+                                          await Future.delayed(
+                                              Duration(seconds: 1));
+                                          await profileScreenController
+                                              .getMedicalDetails();
+                                        },
+                                        child: ListView.builder(
+                                          physics: BouncingScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount: profileScreenController
+                                              .getMedicalDetails
+                                              .value
+                                              .data!
+                                              .length,
+                                          itemBuilder: (context, index) =>
+                                              SizedBox(
+                                            child: Column(
+                                              children: [
+                                                h2,
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 20),
+                                                  child: Container(
+                                                    height: 360,
+                                                    width: context.width * 8,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            width: 2,
+                                                            color: appColor)),
+                                                    child: Column(
+                                                      children: [
+                                                        h2,
+                                                        Container(
+                                                          height: 150,
+                                                          width: context.width *
+                                                              0.7,
+                                                          decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  width: 1)),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(5.0),
+                                                            child: Text(
+                                                              profileScreenController
+                                                                          .getMedicalDetails
+                                                                          .value
+                                                                          .data![
+                                                                              index]
+                                                                          .description ==
+                                                                      null
+                                                                  ? 'Petient last medical history'
+                                                                  : profileScreenController
+                                                                      .getMedicalDetails
+                                                                      .value
+                                                                      .data![
+                                                                          index]
+                                                                      .description
+                                                                      .toString(),
+                                                              style: TextStyle(
+                                                                  fontSize: 14,
+                                                                  // letterSpacing: 1.2,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      h1,
-                                                      Container(
-                                                        height: 50,
-                                                        width:
-                                                            context.width * 0.7,
-                                                        decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                                color:
-                                                                    Colors.black,
-                                                                width: 1)),
-                                                        child: Center(
-                                                          child: Text(
-                                                            profileScreenController
-                                                                        .getMedicalDetails
-                                                                        .value
-                                                                        .data![
-                                                                            index]
-                                                                        .date ==
-                                                                    null
-                                                                ? 'XX/XX/XXXX'
-                                                                : profileScreenController
-                                                                    .getMedicalDetails
-                                                                    .value
-                                                                    .data![index]
-                                                                    .date
-                                                                    .toString(),
-                                                            style: TextStyle(
-                                                                fontSize: 18,
-                                                                // letterSpacing: 1.2,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w800),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      h1,
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Get.to(ViewFileScreen(
-                                                            index: index,
-                                                          ));
-                                                          // profileScreenController
-                                                          //         .fileToDisplay =
-                                                          //     profileScreenController
-                                                          //         .getMedicalDetails
-                                                          //         .value
-                                                          //         .data![index]
-                                                          //         .file;
-                                                        },
-                                                        child: Container(
+                                                        h1,
+                                                        Container(
                                                           height: 50,
-                                                          width:
-                                                              context.width * 0.7,
+                                                          width: context.width *
+                                                              0.7,
                                                           decoration: BoxDecoration(
                                                               border: Border.all(
                                                                   color: Colors
@@ -748,157 +741,196 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                                   width: 1)),
                                                           child: Center(
                                                             child: Text(
-                                                              'View File',
+                                                              profileScreenController
+                                                                          .getMedicalDetails
+                                                                          .value
+                                                                          .data![
+                                                                              index]
+                                                                          .date ==
+                                                                      null
+                                                                  ? 'XX/XX/XXXX'
+                                                                  : profileScreenController
+                                                                      .getMedicalDetails
+                                                                      .value
+                                                                      .data![
+                                                                          index]
+                                                                      .date
+                                                                      .toString(),
                                                               style: TextStyle(
                                                                   fontSize: 18,
-                                                                  color: Colors
-                                                                      .green,
-                                                                  letterSpacing:
-                                                                      1.2,
+                                                                  // letterSpacing: 1.2,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w800),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      h1,
-                                                      Container(
-                                                        width:
-                                                            context.width * 0.7,
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceAround,
-                                                          children: [
-                                                            InkWell(
-                                                              onTap: () {
-                                                                Get.to(
-                                                                    UpdateMedicalDetails(
-                                                                  postId: profileScreenController
-                                                                      .getMedicalDetails
-                                                                      .value
-                                                                      .data![
-                                                                          index]
-                                                                      .id
-                                                                      .toString(), index: index,
-                                                                ));
-                                                              },
-                                                              child: Container(
-                                                                color:
-                                                                    Colors.green,
-                                                                height: 40,
-                                                                width: context
-                                                                        .width *
-                                                                    0.3,
-                                                                child: Center(
-                                                                    child: Text(
-                                                                  'Update',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          18,
-                                                                      color: Colors
-                                                                          .white,
-                                                                      letterSpacing:
-                                                                          1.2,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800),
-                                                                )),
+                                                        h1,
+                                                        InkWell(
+                                                          onTap: () {
+                                                            Get.to(
+                                                                ViewFileScreen(
+                                                              index: index,
+                                                            ));
+                                                            // profileScreenController
+                                                            //         .fileToDisplay =
+                                                            //     profileScreenController
+                                                            //         .getMedicalDetails
+                                                            //         .value
+                                                            //         .data![index]
+                                                            //         .file;
+                                                          },
+                                                          child: Container(
+                                                            height: 50,
+                                                            width:
+                                                                context.width *
+                                                                    0.7,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    width: 1)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                'View File',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        18,
+                                                                    color: Colors
+                                                                        .green,
+                                                                    letterSpacing:
+                                                                        1.2,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800),
                                                               ),
                                                             ),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                Get.defaultDialog(
-                                                                    title:
-                                                                        'Are you Sure!',
-                                                                    content:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .symmetric(
-                                                                          horizontal:
-                                                                              30),
-                                                                      child: Row(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .center,
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                ElevatedButton(
-                                                                              onPressed: () =>
-                                                                                  Get.back(),
-                                                                              child:
-                                                                                  Text('Cancel'),
-                                                                              style: ElevatedButton.styleFrom(
-                                                                                  fixedSize: Size(80, 30),
-                                                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                                                                  backgroundColor: appColor),
-                                                                            ),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width:
-                                                                                20,
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child:
-                                                                                ElevatedButton(
-                                                                              onPressed:
-                                                                                  () async {
-                                                                                await profileScreenController.deleteMedHistory(
-                                                                                  profileScreenController.getMedicalDetails.value.data![index].id.toString(),
-                                                                                );
-                                                                                await profileScreenController.getUserMedicalDetails();
-                
-                                                                                await Get.off(BottumNavBarScreen());
-                                                                                Get.back();
-                                                                              },
-                                                                              child:
-                                                                                  Text('Yes'),
-                                                                              style: ElevatedButton.styleFrom(
-                                                                                  fixedSize: Size(80, 30),
-                                                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                                                                  backgroundColor: appColor),
-                                                                            ),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    ));
-                                                              },
-                                                              child: Container(
-                                                                color: Colors.red,
-                                                                height: 40,
-                                                                width: context
-                                                                        .width *
-                                                                    0.3,
-                                                                child: Center(
-                                                                    child: Text(
-                                                                  'Delete',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          18,
-                                                                      color: Colors
-                                                                          .white,
-                                                                      letterSpacing:
-                                                                          1.2,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800),
-                                                                )),
-                                                              ),
-                                                            )
-                                                          ],
+                                                          ),
                                                         ),
-                                                      )
-                                                    ],
+                                                        h1,
+                                                        Container(
+                                                          width: context.width *
+                                                              0.7,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceAround,
+                                                            children: [
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Get.to(
+                                                                      UpdateMedicalDetails(
+                                                                    postId: profileScreenController
+                                                                        .getMedicalDetails
+                                                                        .value
+                                                                        .data![
+                                                                            index]
+                                                                        .id
+                                                                        .toString(),
+                                                                    index:
+                                                                        index,
+                                                                  ));
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  color: Colors
+                                                                      .green,
+                                                                  height: 40,
+                                                                  width: context
+                                                                          .width *
+                                                                      0.3,
+                                                                  child: Center(
+                                                                      child:
+                                                                          Text(
+                                                                    'Update',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            18,
+                                                                        color: Colors
+                                                                            .white,
+                                                                        letterSpacing:
+                                                                            1.2,
+                                                                        fontWeight:
+                                                                            FontWeight.w800),
+                                                                  )),
+                                                                ),
+                                                              ),
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Get.defaultDialog(
+                                                                      title: 'Are you Sure!',
+                                                                      content: Padding(
+                                                                        padding:
+                                                                            const EdgeInsets.symmetric(horizontal: 30),
+                                                                        child:
+                                                                            Row(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.center,
+                                                                          children: [
+                                                                            Padding(
+                                                                              padding: const EdgeInsets.all(8.0),
+                                                                              child: ElevatedButton(
+                                                                                onPressed: () => Get.back(),
+                                                                                child: Text('Cancel'),
+                                                                                style: ElevatedButton.styleFrom(fixedSize: Size(80, 30), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), backgroundColor: appColor),
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: 20,
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: const EdgeInsets.all(8.0),
+                                                                              child: ElevatedButton(
+                                                                                onPressed: () async {
+                                                                                  await profileScreenController.deleteMedHistory(
+                                                                                    profileScreenController.getMedicalDetails.value.data![index].id.toString(),
+                                                                                  );
+                                                                                  await profileScreenController.getUserMedicalDetails();
+
+                                                                                  await Get.off(BottumNavBarScreen());
+                                                                                  Get.back();
+                                                                                },
+                                                                                child: Text('Yes'),
+                                                                                style: ElevatedButton.styleFrom(fixedSize: Size(80, 30), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), backgroundColor: appColor),
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        ),
+                                                                      ));
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  height: 40,
+                                                                  width: context
+                                                                          .width *
+                                                                      0.3,
+                                                                  child: Center(
+                                                                      child:
+                                                                          Text(
+                                                                    'Delete',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            18,
+                                                                        color: Colors
+                                                                            .white,
+                                                                        letterSpacing:
+                                                                            1.2,
+                                                                        fontWeight:
+                                                                            FontWeight.w800),
+                                                                  )),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -924,9 +956,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     )
                                   ],
                                 ),
-                
+
                           // ),
-                
+
                           Column(
                             children: [
                               h2,
@@ -957,9 +989,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         width: context.width * .7,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
-                                                image: NetworkImage(cardController
-                                                    .userDetailsModel!.data!.card
-                                                    .toString())),
+                                                image: NetworkImage(
+                                                    cardController
+                                                        .userDetailsModel!
+                                                        .data!
+                                                        .card
+                                                        .toString())),
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             border: Border.all(
@@ -984,7 +1019,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 style: ElevatedButton.styleFrom(
                                     fixedSize: Size(180, 45),
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30)),
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
                                     backgroundColor: appColor),
                               )
                             ],

@@ -7,8 +7,6 @@ class UserDetails{
     baseUrl: orginalApis.baseUrl,responseType: ResponseType.plain
   ));
 
-
-
 Future<Response> userLoginCheck (String id)async{
 
     try {

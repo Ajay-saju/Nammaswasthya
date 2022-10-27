@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/main.dart';
-
+import 'package:local_auth/local_auth.dart';
+import 'package:swasthya/view/splash_screen/spash_screen_controller.dart';
 import '../bottom_navigation_bar/navigation_screen.dart';
 import '../home_screen/home_screen.dart';
 
@@ -18,11 +20,13 @@ class SpalshScreen extends StatefulWidget {
 class _SpalshScreenState extends State<SpalshScreen> {
   late Image image1;
   late SvgPicture image2;
-  // late Text title;
+  final splashScreenController = Get.put(SplashScreenController());
 
   @override
   void initState() {
     super.initState();
+    //  splashScreenController.getAllBioMetrics();
+
     image1 = Image.asset(
       'asset/images/namma swasthya logo m.png',
       width: 100,
@@ -30,17 +34,12 @@ class _SpalshScreenState extends State<SpalshScreen> {
     );
     image2 = SvgPicture.asset('asset/icons/logo only.svg');
 
-    Timer(Duration(seconds: 3), () {
-      if (prefer.getString('id') == null) {
-        Get.to(const PhoneNumberVerificationScreen());
-      } else {
-        Get.to(BottumNavBarScreen());
-      }
-    });
+    splashScreenController.authenticateUser();
   }
 
   @override
   void didChangeDependencies() {
+    precacheImage(image1.image, context);
     precachePicture(image2.pictureProvider, context);
 
     super.didChangeDependencies();

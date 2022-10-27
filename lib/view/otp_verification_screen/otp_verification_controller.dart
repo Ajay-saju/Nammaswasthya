@@ -28,8 +28,8 @@ class OtpVerificationController extends GetxController {
       final response =
           await userPhoneNumberVerificationApiCall.userLoginCheck(numberVerifi);
 
-      log(response.data);
-      log(response.statusMessage.toString());
+      // log(response.data);
+      // log(response.statusMessage.toString());
       var jsonFi = jsonDecode(response.data);
 
       var js = jsonFi["status"];
@@ -37,10 +37,10 @@ class OtpVerificationController extends GetxController {
 
       if (js == "success") {
         print("checking1");
-        Get.defaultDialog(
-            title: 'Success', middleText: 'Your mobile number verified');
+        // Get.defaultDialog(
+        //     title: 'Success', middleText: 'Your mobile number verified');
 
-        print('login model  :${response.data}');
+        // print('login model  :${response.data}');
 
         userloginModel.value = UserLogin.fromJson(jsonFi);
 

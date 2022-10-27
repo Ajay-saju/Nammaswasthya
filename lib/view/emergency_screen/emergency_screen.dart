@@ -40,6 +40,28 @@ class EmergencyScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
+                    'Namma Swasthya Emergency',
+                    style: TextStyle(
+                        color: appColor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  TextButton(
+                      onPressed: () {
+                        FlutterPhoneDirectCaller.callNumber('+919620402211');
+                      },
+                      child: Text(
+                        "+911234567890",
+                        style:
+                            TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      ))
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
                     'Ambulance',
                     style: TextStyle(
                         color: appColor,

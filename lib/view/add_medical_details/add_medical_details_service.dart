@@ -16,6 +16,7 @@ class MedicalDetailService {
           Response response =await dio.post('medical_history',data:form );
           return response;
           
+          
         } on DioError catch (e){
      print(e.message);
       rethrow;

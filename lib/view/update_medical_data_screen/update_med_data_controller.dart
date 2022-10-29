@@ -2,18 +2,26 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/main.dart';
 import 'package:swasthya/view/update_medical_data_screen/update_med_servise.dart';
 import 'package:dio/dio.dart' as form;
 
 class UpdateMedDataController extends GetxController {
-  PlatformFile? medicalFile;
-  String? fileName;
-  String? postId;
 
-  String description = '';
-  String date = '';
+  TextEditingController dateinput = TextEditingController();
+  
+  PlatformFile? medicalFile ;
+  var  fileImage= false.obs;
+  var fileName ='';
+  var oldFile;
+  var postId;
+
+  var description = '';
+  var date ;
+  
+
 
   getFile() async {
     final result = await FilePicker.platform.pickFiles(
@@ -24,7 +32,13 @@ class UpdateMedDataController extends GetxController {
     if (result != null) {
       fileName = result.files.first.name;
       medicalFile = result.files.first;
+      fileImage.value=true;
     }
+    else{
+      fileName = oldFile;
+      medicalFile= oldFile;
+    }
+    update();
   }
 
   updateMedData(String postId) async {
@@ -33,7 +47,8 @@ class UpdateMedDataController extends GetxController {
       "user_id": prefer.getString('id').toString(),
       "description": description,
       "date": date,
-      "file": await form.MultipartFile.fromFile(medicalFile!.path!,
+      "file": 
+      await form.MultipartFile.fromFile(medicalFile!.path!,
           filename: fileName),
     });
     var response = await updateMedicalData.updateData(formData, postId);
@@ -49,5 +64,6 @@ class UpdateMedDataController extends GetxController {
           title: 'Success', middleText: 'File uploaded successfully');
 
     print('login model  :${response.data}');
+    update();
   }
 }

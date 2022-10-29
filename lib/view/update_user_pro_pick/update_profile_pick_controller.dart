@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:swasthya/view/update_user_pro_pick/update_pro_pick_service.dart';
 import 'package:dio/dio.dart' as di;
@@ -31,10 +29,18 @@ class ProfilePickController extends GetxController {
         imageQuality: 50,
         maxHeight: 500,
         maxWidth: 500);
-    fileImage.value = fImage!.path;
-    print("from_gallery:${fImage.path}");
-    print('Workinggggggg');
-    update();
+
+    if (fImage != null) {
+      File? img = File(fImage.path.toString());
+      img = await cropImage(img);
+      fileImage.value = img!.path;
+    }
+    return;
+
+    // fileImage.value = fImage!.path;
+    // print("from_gallery:${fImage.path}");
+    // print('Workinggggggg');
+    // update();
   }
 
   imageFromCamara() async {
@@ -43,8 +49,17 @@ class ProfilePickController extends GetxController {
         imageQuality: 50,
         maxHeight: 500,
         maxWidth: 500);
-    fileImage.value = fImage!.path;
-    print("from_camera:${fImage.path}");
+
+    if (fImage != null) {
+      File? img = File(fImage.path.toString());
+      img = await cropImage(img);
+      fileImage.value = img!.path;
+    }
+    return;
+
+    // fileImage.value = fImage.path;
+
+    // print("from_camera:${fImage.path}");
     // update();
   }
 
@@ -54,19 +69,9 @@ class ProfilePickController extends GetxController {
 
     File image = File(fileImage.value);
 
-    // List<int> imageBytes = image.readAsBytesSync();
-    // String baseImage = base64Encode(imageBytes);
-
-    // print(baseImage.toString());
-    // print('-------------------------------------------------------');
-
     print(image.path.toString());
 
     String fileName = image.path.split('/').last;
-
-    // print('-------------------------------------------------------');
-
-    // print(fileName.toString());
 
     di.FormData form = di.FormData.fromMap({
       "user_id": prefer.getString('id').toString(),
@@ -80,14 +85,19 @@ class ProfilePickController extends GetxController {
       var response = await updateUserProfilePickService.uploadImage(form);
 
       print("printing_res${response.toString()}");
-
-      // var jsonFile = jsonDecode(response.data);
-      // log(jsonFile);
       print(response.statusCode.toString());
       if (response.statusCode == 200)
         Get.defaultDialog(
             title: response.data["status"],
             middleText: response.data["message"]);
     } catch (e) {}
+  }
+
+  Future<File?> cropImage(File imageFile) async {
+    var cropedImage = await ImageCropper()
+        .cropImage(
+          cropStyle: CropStyle.circle, sourcePath: imageFile.path);
+    if (cropedImage == null) return null;
+    return File(cropedImage.path);
   }
 }

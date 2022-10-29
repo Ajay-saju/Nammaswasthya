@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:swasthya/view/bottom_navigation_bar/navigation_screen.dart';
-import 'package:swasthya/view/dashboard_screen/dashboard_screen.dart';
 import 'package:swasthya/view/update_user_pro_pick/update_profile_pick_controller.dart';
 
 import '../core/colors.dart';

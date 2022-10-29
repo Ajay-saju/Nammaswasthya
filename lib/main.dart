@@ -11,7 +11,7 @@ late SharedPreferences prefer;
 
 
 void main() async {
-  Future.delayed(Duration(seconds: 7), () async {
+  Future.delayed(Duration(seconds: 2), () async {
     WidgetsFlutterBinding.ensureInitialized();
     prefer = await SharedPreferences.getInstance();
 

@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as form;
 import 'package:swasthya/main.dart';
+import 'package:swasthya/view/dashboard_screen/dashboard_screen.dart';
 
 import 'add_medical_details_service.dart';
 
@@ -48,6 +49,7 @@ class AddMedicalDetailsController extends GetxController {
     if (jsonFile["status"] == "success")
       Get.defaultDialog(
           title: 'Success', middleText: 'File uploaded successfully');
+          Get.to(DashBoardScreen());
 
     print('login model  :${response.data}');
   }

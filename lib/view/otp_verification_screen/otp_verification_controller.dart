@@ -53,7 +53,7 @@ class OtpVerificationController extends GetxController {
             'city', userloginModel.value.data!.city.toString());
         print(prefer.getString('name'));
 
-        Timer(Duration(seconds: 3), () {
+        Timer(Duration(seconds: 1), () {
           Get.to(() => BottumNavBarScreen());
         });
       } else {

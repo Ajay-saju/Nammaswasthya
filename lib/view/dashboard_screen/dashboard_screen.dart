@@ -16,7 +16,7 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   // final otpVerificationController = Get.put(OtpVerificationController());
   final dashBordController = Get.put(DashBordController());
-
+  
   @override
   void initState() {
     super.initState();
@@ -26,6 +26,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // final currentHeight =MediaQuery.of(context).size.height;
+
     return GetBuilder<DashBordController>(builder: (_) {
       return dashBordController.userDetailsModel == null ||
               dashBordController.userDetailsModel!.data == null
@@ -35,17 +37,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           : Scaffold(
               backgroundColor: Colors.white,
               body: SafeArea(
-                  child: SingleChildScrollView(
-                child: RefreshIndicator(
-                  displacement: 250,
-                  backgroundColor: Colors.yellow,
-                  color: Colors.red,
-                  strokeWidth: 3,
-                  triggerMode: RefreshIndicatorTriggerMode.onEdge,
-                  onRefresh: () async {
-                    await dashBordController.loadHomePage();
-                    await dashBordController.counting();
-                  },
+                  child: RefreshIndicator(
+                displacement: 250,
+                backgroundColor: Colors.yellow,
+                color: appColor,
+                strokeWidth: 3,
+                triggerMode: RefreshIndicatorTriggerMode.anywhere,
+                onRefresh: () async {
+                  dashBordController.loadHomePage();
+                  dashBordController.counting();
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -70,7 +74,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               width: 20,
                             ),
                             Text(
-                              dashBordController.userDetailsModel!.data != null
+                              dashBordController.userDetailsModel!.data !=
+                                      null
                                   ? dashBordController
                                       .userDetailsModel!.data!.fullname!
                                       .toUpperCase()
@@ -117,7 +122,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               border:
                                   Border.all(width: 1, color: Colors.black)),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15),
                             child: Row(
                               children: [
                                 SizedBox(
@@ -150,7 +156,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     // keyboardAppearance: Brightness.light,
                                     // validator: ()=>null,
                                     decoration: InputDecoration.collapsed(
-                                      hintText: 'Select your doctor or symptom',
+                                      hintText:
+                                          'Select your doctor or symptom',
                                       hintStyle: TextStyle(
                                         color: Colors.black87,
                                         fontSize: 17,
@@ -194,8 +201,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 width: context.width * .7,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    border:
-                                        Border.all(width: 4, color: appColor)),
+                                    border: Border.all(
+                                        width: 4, color: appColor)),
                                 child: IconButton(
                                     onPressed: () {
                                       Get.to(AllCardScreen());

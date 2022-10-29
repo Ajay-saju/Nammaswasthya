@@ -70,7 +70,7 @@ class ProfileScreenController extends GetxController {
     update();
   }
 
-  deleteMedHistory(String postId) async {
+    deleteMedHistory(String postId) async {
     final deletePostService = DeletePostService();
     var response = await deletePostService.deletePost(postId);
     print("printing_res${response.toString()}");

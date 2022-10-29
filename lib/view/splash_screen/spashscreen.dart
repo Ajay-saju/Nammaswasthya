@@ -40,7 +40,7 @@ class _SpalshScreenState extends State<SpalshScreen> {
   @override
   void didChangeDependencies() {
     precacheImage(image1.image, context);
-    precachePicture(image2.pictureProvider, context);
+    // precachePicture(image2.pictureProvider, context);
 
     super.didChangeDependencies();
   }

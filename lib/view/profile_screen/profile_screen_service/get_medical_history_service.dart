@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:swasthya/main.dart';
-
 import '../../../original_api/orginal_apis.dart';
 
 class MedicalHistoryApiService {

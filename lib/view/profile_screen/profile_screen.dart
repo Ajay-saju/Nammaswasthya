@@ -29,7 +29,6 @@ class _ProfileScreenState extends State<ProfileScreen>
   void initState() {
     profileScreenController.getUserProfileData();
     profileScreenController.getUserMedicalDetails();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -662,8 +661,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                             ],
                           ),
                           profileScreenController
-                                      .getMedicalDetails.value.data ==
-                                  null
+                                          .getMedicalDetails.value.data ==
+                                      null ||
+                                  profileScreenController.getMedicalDetails
+                                          .value.data!.length ==
+                                      0
                               ? Center(
                                   child: ElevatedButton(
                                     onPressed: () {
@@ -918,10 +920,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                                                   await profileScreenController.deleteMedHistory(
                                                                                     profileScreenController.getMedicalDetails.value.data![index].id.toString(),
                                                                                   );
+                                                                                  Get.back();
+
                                                                                   await profileScreenController.getUserMedicalDetails();
 
                                                                                   await Get.off(BottumNavBarScreen());
-                                                                                  Get.back();
                                                                                 },
                                                                                 child: Text('Yes'),
                                                                                 style: ElevatedButton.styleFrom(fixedSize: Size(80, 30), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), backgroundColor: appColor),
@@ -969,12 +972,15 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       ),
                                     ),
                                     h2,
+
+                                    // profileScreenController
+                                    //     .getMedicalDetails.value.data != null   ?
                                     ElevatedButton(
                                       onPressed: () {
                                         Get.to(AddMedicalDetailsScreen());
                                       },
                                       child: Text(
-                                        'Add Details',
+                                        'Add Medical Details',
                                         style: TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.bold,

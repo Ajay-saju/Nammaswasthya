@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/main.dart';
 import 'package:swasthya/view/core/colors.dart';
-
 import '../core/constent_size.dart';
 import '../home_screen/home_screen.dart';
 
@@ -16,6 +15,10 @@ class MoreOptionScreen extends StatelessWidget {
           child: Column(
         children: [
           h2,
+          // Row(children: [
+          //   Text('Biometric Authentication'),Spacer(),
+
+          // ],),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: InkWell(

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -11,7 +10,7 @@ late SharedPreferences prefer;
 
 
 void main() async {
-  Future.delayed(Duration(seconds: 2), () async {
+  Future.delayed(Duration(milliseconds: 5), () async {
     WidgetsFlutterBinding.ensureInitialized();
     prefer = await SharedPreferences.getInstance();
 
@@ -35,7 +34,6 @@ class MyApp extends StatelessWidget {
         Image(image: AssetImage('asset/images/namma swasthya logo m.png'))
             .image,
         context);
-    final login = prefer.getString("id");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

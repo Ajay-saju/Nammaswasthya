@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/view/update_medical_data_screen/update_med_data_controller.dart';
@@ -9,27 +7,20 @@ import '../core/colors.dart';
 import '../core/constent_size.dart';
 import '../profile_screen/profile_screen_controller.dart';
 
-class UpdateMedicalDetails extends StatefulWidget {
+class UpdateMedicalDetails extends StatelessWidget {
   String postId;
   int index;
   UpdateMedicalDetails({Key? key, required this.postId, required this.index})
       : super(key: key);
 
   @override
-  State<UpdateMedicalDetails> createState() => _UpdateMedicalDetailsState();
-}
-
-class _UpdateMedicalDetailsState extends State<UpdateMedicalDetails> {
-  ProfileScreenController oldData = Get.find();
-
   final updateMedDataController = Get.put(UpdateMedDataController());
-
-  //
+  ProfileScreenController oldData = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    // updateMedDataController.dateinput.text=oldData
-    //                   .getMedicalDetails.value.data![widget.index].date.toString();
+    updateMedDataController.dateinput.text =
+        oldData.getMedicalDetails.value.data![index].date.toString();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -60,8 +51,8 @@ class _UpdateMedicalDetailsState extends State<UpdateMedicalDetails> {
               SizedBox(
                 height: 200,
                 child: TextFormField(
-                  initialValue: oldData
-                      .getMedicalDetails.value.data![widget.index].description,
+                  initialValue:
+                      oldData.getMedicalDetails.value.data![index].description,
                   onChanged: (value) {
                     updateMedDataController.description = value;
                   },
@@ -117,25 +108,24 @@ class _UpdateMedicalDetailsState extends State<UpdateMedicalDetails> {
                       if (pickedDate != null) {
                         print(pickedDate);
                         String formattedDate =
-                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                            DateFormat('dd-MM-yyyy').format(pickedDate);
                         print(
                             formattedDate); //formatted date output using intl package =>  2021-03-16
 
-                        setState(() {
-                          updateMedDataController.dateinput.text =
-                              formattedDate; //set output date to TextField value.
-                        });
+                        updateMedDataController.dateinput.text =
+                            formattedDate; //set output date to TextField value.
+
                       } else {
                         print("Date is not selected");
                       }
-                      updateMedDataController.date =
+                      updateMedDataController.date.value =
                           updateMedDataController.dateinput.text;
                     },
-                    onChanged: (value) {
-                      updateMedDataController.date =
-                          updateMedDataController.dateinput.text;
-                      print(updateMedDataController.date);
-                    },
+                    // onChanged: (value) {
+                    //   updateMedDataController.date.value =
+                    //       updateMedDataController.dateinput.text;
+                    //   // print(updateMedDataController.date);
+                    // },
                     keyboardType: TextInputType.none,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -171,12 +161,6 @@ class _UpdateMedicalDetailsState extends State<UpdateMedicalDetails> {
                 },
               ),
               h2,
-              updateMedDataController.fileImage == true
-                  ? Obx(() => Text(
-                        "One File Is Added",
-                        style: TextStyle(fontSize: 18, color: Colors.red),
-                      ))
-                  : SizedBox(),
               ElevatedButton(
                 onPressed: () async {
                   await updateMedDataController.getFile();
@@ -195,10 +179,19 @@ class _UpdateMedicalDetailsState extends State<UpdateMedicalDetails> {
                     backgroundColor: appColor),
               ),
               h2,
+              Obx(
+                () => Text(
+                  updateMedDataController.fileImage.value == true
+                      ? "*One File Is Added"
+                      : '',
+                  style: TextStyle(fontSize: 18, color: Colors.red),
+                ),
+              ),
+              h1,
               ElevatedButton(
                 onPressed: () async {
-                  await updateMedDataController.updateMedData(widget.postId);
-                  await await Get.off(BottumNavBarScreen());
+                  await updateMedDataController.updateMedData(postId);
+                   await Get.off(BottumNavBarScreen());
                 },
                 child: Text(
                   'Upload Medical Details',

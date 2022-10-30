@@ -1,11 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:swasthya/view/core/colors.dart';
-
 import '../dashboard_screen/dashboard_controller.dart';
 import '../dashboard_screen/dashboard_screen.dart';
 import '../emergency_screen/emergency_screen.dart';
@@ -13,14 +10,30 @@ import '../more_option_screen/more_option_screen.dart';
 import '../profile_screen/profile_screen.dart';
 import 'bottum_nav_controller.dart';
 
-class BottumNavBarScreen extends StatelessWidget {
+
+ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
+class BottumNavBarScreen extends StatefulWidget {
   BottumNavBarScreen({Key? key}) : super(key: key);
 
+  @override
+  State<BottumNavBarScreen> createState() => _BottumNavBarScreenState();
+}
+
+class _BottumNavBarScreenState extends State<BottumNavBarScreen> {
+
+  @override
+  void initState() {
+    indexChaingeNotifier=ValueNotifier(0);
+    super.initState();
+  }
+  
   final dashBordController = Get.put(DashBordController());
+
   final navigationController = Get.put(BottomNavBarController());
 
   @override
   Widget build(BuildContext context) {
+    
     final screens = [
       DashBoardScreen(),
       EmergencyScreen(),
@@ -70,8 +83,10 @@ class BottumNavBarScreen extends StatelessWidget {
         body: Stack(
           children: [
             ValueListenableBuilder(
+              
                 valueListenable: indexChaingeNotifier,
                 builder: (context, int index, _) {
+                  
                   return screens[index];
                 })
           ],
@@ -82,7 +97,7 @@ class BottumNavBarScreen extends StatelessWidget {
   }
 }
 
-ValueNotifier<int> indexChaingeNotifier = ValueNotifier(0);
+
 
 class MyBottumNavBar extends StatelessWidget {
   const MyBottumNavBar({
@@ -91,10 +106,13 @@ class MyBottumNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return ValueListenableBuilder(
         valueListenable: indexChaingeNotifier,
         builder: (context, int newIndex, _) {
           return BottomNavigationBar(
+            
+            
             showSelectedLabels: false,
             showUnselectedLabels: false,
               // backgroundColor: Colors.white,

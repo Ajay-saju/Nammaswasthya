@@ -10,33 +10,36 @@ import 'package:dio/dio.dart' as form;
 
 class UpdateMedDataController extends GetxController {
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+     fileImage.value = false;
+
+  }
   TextEditingController dateinput = TextEditingController();
-  
-  PlatformFile? medicalFile ;
-  var  fileImage= false.obs;
-  var fileName ='';
+
+  PlatformFile? medicalFile;
+  var fileImage = false.obs;
+  var fileName = '';
   var oldFile;
   var postId;
-
   var description = '';
-  var date ;
-  
-
+  var date = ''.obs;
 
   getFile() async {
     final result = await FilePicker.platform.pickFiles(
-      
       allowMultiple: false,
-     
     );
     if (result != null) {
       fileName = result.files.first.name;
       medicalFile = result.files.first;
-      fileImage.value=true;
-    }
-    else{
+      fileImage.value = true;
+
+      update();
+    } else {
       fileName = oldFile;
-      medicalFile= oldFile;
+      medicalFile = oldFile;
     }
     update();
   }
@@ -46,9 +49,8 @@ class UpdateMedDataController extends GetxController {
     form.FormData formData = form.FormData.fromMap({
       "user_id": prefer.getString('id').toString(),
       "description": description,
-      "date": date,
-      "file": 
-      await form.MultipartFile.fromFile(medicalFile!.path!,
+      "date": date.value,
+      "file": await form.MultipartFile.fromFile(medicalFile!.path!,
           filename: fileName),
     });
     var response = await updateMedicalData.updateData(formData, postId);

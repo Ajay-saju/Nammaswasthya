@@ -41,96 +41,176 @@ class EmergencyScreen extends StatelessWidget {
               Text(
                 'Namma Swasthya Emergency',
                 style: TextStyle(
-                    color: appColor, fontSize: 19, fontWeight: FontWeight.bold),
+                    color: appColor, fontSize: 17, fontWeight: FontWeight.bold),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 150),
-                child: TextButton(
-                    onPressed: () {
-                      FlutterPhoneDirectCaller.callNumber('+919620402211');
-                    },
-                    child: Text(
-                      "+911234567890",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
+              TextButton(
+                  onPressed: () {
+                    FlutterPhoneDirectCaller.callNumber('+919620402211');
+                  },
+                  child: Text(
+                    "+919620402211",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  )),
+              Text(
+                "Women's Helpline",
+                style: TextStyle(
+                    color: appColor, fontSize: 17, fontWeight: FontWeight.bold),
               ),
-              //
+              Row(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        FlutterPhoneDirectCaller.callNumber(
+                          '+1091',
+                        );
+                      },
+                      child: Text(
+                        "+1091",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      )),
+                  Text(
+                    ',',
+                    style: TextStyle(
+                        color: Colors.blue[300],
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        FlutterPhoneDirectCaller.callNumber(
+                          '+181',
+                        );
+                      },
+                      child: Text(
+                        '181',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ))
+                ],
+              ),
+              Text(
+                'Senior Citizens Helpline',
+                style: TextStyle(
+                    color: appColor, fontSize: 17, fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                  onPressed: () {
+                    FlutterPhoneDirectCaller.callNumber('1090');
+                  },
+                  child: Text(
+                    "1090",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  )),
+              Text(
+                "Children's Helpline",
+                style: TextStyle(
+                    color: appColor, fontSize: 17, fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                  onPressed: () {
+                    FlutterPhoneDirectCaller.callNumber('1098');
+                  },
+                  child: Text(
+                    "1098",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  )),
               Text(
                 'Ambulance',
                 style: TextStyle(
-                    color: appColor, fontSize: 19, fontWeight: FontWeight.bold),
+                    color: appColor, fontSize: 17, fontWeight: FontWeight.bold),
               ),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 150),
-                child: TextButton(
-                    onPressed: () {
-                      FlutterPhoneDirectCaller.callNumber('+911234567890');
-                    },
-                    child: Text(
-                      "+911234567890",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
+              Row(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        FlutterPhoneDirectCaller.callNumber('105711');
+                      },
+                      child: Text(
+                        '105711',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      )),
+                  Text(
+                    ',',
+                    style: TextStyle(
+                        color: Colors.blue[300],
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        FlutterPhoneDirectCaller.callNumber('108');
+                      },
+                      child: Text(
+                        "108",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      )),
+                ],
               ),
-
+              Text(
+                'Fireforce',
+                style: TextStyle(
+                    color: appColor, fontSize: 17, fontWeight: FontWeight.bold),
+              ),
+              Row(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        FlutterPhoneDirectCaller.callNumber('080-22971500');
+                      },
+                      child: Text(
+                        "080-22971500",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      )),
+                  Text(
+                    ',',
+                    style: TextStyle(
+                        color: Colors.blue[300],
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        FlutterPhoneDirectCaller.callNumber('101');
+                      },
+                      child: Text(
+                        "101",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      )),
+                ],
+              ),
               Text(
                 'Police',
                 style: TextStyle(
-                    color: appColor, fontSize: 19, fontWeight: FontWeight.bold),
+                    color: appColor, fontSize: 17, fontWeight: FontWeight.bold),
               ),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 150),
-                child: TextButton(
-                    onPressed: () {
-                      FlutterPhoneDirectCaller.callNumber('100');
-                    },
-                    child: Text(
-                      "100                       ",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
-              ),
+              TextButton(
+                  onPressed: () {
+                    FlutterPhoneDirectCaller.callNumber('100');
+                  },
+                  child: Text(
+                    "100                       ",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  )),
               h1,
               Text(
                 'Emergency',
                 style: TextStyle(
-                    color: appColor, fontSize: 19, fontWeight: FontWeight.bold),
+                    color: appColor, fontSize: 17, fontWeight: FontWeight.bold),
               ),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 150),
-                child: TextButton(
-                    onPressed: () {
-                      FlutterPhoneDirectCaller.callNumber('911');
-                    },
-                    child: Text(
-                      "911                       ",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
-              ),
+              TextButton(
+                  onPressed: () {
+                    FlutterPhoneDirectCaller.callNumber('911');
+                  },
+                  child: Text(
+                    "911                       ",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  )),
               h1,
-              Text(
-                'Fireforce',
-                style: TextStyle(
-                    color: appColor, fontSize: 19, fontWeight: FontWeight.bold),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 150),
-                child: TextButton(
-                    onPressed: () {
-                      FlutterPhoneDirectCaller.callNumber('101');
-                    },
-                    child: Text(
-                      "101                       ",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
-              )
             ],
           ),
         ),

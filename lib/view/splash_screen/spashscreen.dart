@@ -1,14 +1,9 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:swasthya/main.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:swasthya/view/splash_screen/spash_screen_controller.dart';
-import '../bottom_navigation_bar/navigation_screen.dart';
-import '../home_screen/home_screen.dart';
+
 
 class SpalshScreen extends StatefulWidget {
   const SpalshScreen({Key? key}) : super(key: key);

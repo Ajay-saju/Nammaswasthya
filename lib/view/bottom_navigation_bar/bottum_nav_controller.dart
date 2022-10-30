@@ -6,10 +6,12 @@ import 'package:swasthya/view/core/colors.dart';
 
 class BottomNavBarController extends GetxController{
 
+  
+
 var tabIndex=0;
 void changeTabIndex(int index){
   
- Color c =appColor;
+//  Color c =appColor;
 }
 
 

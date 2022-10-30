@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:swasthya/view/core/colors.dart';
 import 'package:swasthya/view/user_update_screen/user_update_controller.dart';
 
@@ -23,11 +22,10 @@ class UserProfileUpdateScreen extends StatefulWidget {
 ProfileScreenController pcontroller = Get.find();
 // ProfilePickController pickController = Get.find();
 // ProfilePickController profilePickController = Get.find();
-    final profilePickController = Get.put(ProfilePickController());
+final profilePickController = Get.put(ProfilePickController());
 
-final userUpdatecontroller = UserUpdatecontroller();
+final userUpdatecontroller = Get.put(UserUpdatecontroller());
 final ImagePicker picker = ImagePicker();
-
 
 initState() {
   // pcontroller.getUserProfileDetails();
@@ -53,6 +51,9 @@ String pincode =
 class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
   @override
   Widget build(BuildContext context) {
+    userUpdatecontroller.dob.text =
+        pcontroller.getUserProfileDetails.value.data!.dob.toString();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -235,53 +236,74 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                             contentPadding: const EdgeInsets.only(left: 20.0)),
                       ),
                       h1,
-                      TextFormField(
-                        initialValue: dob == "null" ? 'Date of Birth' : dob,
-                        onChanged: (value) {
-                          dob = value;
+                      GetBuilder<UserUpdatecontroller>(
+                        builder: (_) {
+                          return TextFormField(
+                            // initialValue: dob == "null" ? 'Date of Birth' : dob,
+                            // onChanged: (value) {
+                            //   dob = value;
+                            // },
+                            readOnly: true,
+                            controller: userUpdatecontroller.dob,
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(
+                                      2000), //DateTime.now() - not to allow to choose before today.
+                                  lastDate: DateTime(2101));
+                              if (pickedDate != null) {
+                                print(pickedDate);
+                                String formattedDate =
+                                    DateFormat('dd-MM-yyyy').format(pickedDate);
+                                print(
+                                    formattedDate); //formatted date output using intl package =>  2021-03-16
+
+                                userUpdatecontroller.dob.text =
+                                    formattedDate; //set output date to TextField value.
+
+                              } else {
+                                print("Date is not selected");
+                              }
+                              dob = userUpdatecontroller.dob.text;
+                            },
+                            keyboardType: TextInputType.none,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide:
+                                      const BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: "Date of Birth",
+                                hintStyle: TextStyle(
+                                  fontFamily: "Nunito",
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding:
+                                    const EdgeInsets.only(left: 20.0)),
+                          );
                         },
-                        inputFormatters: [LengthLimitingTextInputFormatter(10)],
-                        keyboardType: TextInputType.text,
-                        // controller: mebController.memName,
-                        // validator: (value) {
-                        //   if (value!.isNotEmpty && value.length > 3) {
-                        //     return null;
-                        //   } else if (value.length < 3 && value.isNotEmpty) {
-                        //     return "Your Name Is Short";
-                        //   } else {
-                        //     return 'Required Name ';
-                        //   }
-                        // },
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: const BorderSide(color: Colors.black),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: const BorderSide(color: Colors.black),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: const BorderSide(color: Colors.grey),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            hintText: "Date of Birth",
-                            hintStyle: TextStyle(
-                              fontFamily: "Nunito",
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: const EdgeInsets.only(left: 20.0)),
                       ),
                       h1,
                       TextFormField(
@@ -644,15 +666,15 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                                         name,
                                         email,
                                         phone_no,
-                                        blood_group,    
+                                        blood_group,
                                         dob,
                                         gender,
                                         occupation,
                                         state,
                                         city,
                                         pincode);
-                                        
-                                        pcontroller.getUserProfileDetails();
+
+                                    pcontroller.getUserProfileDetails();
 
                                     Get.back();
                                   },

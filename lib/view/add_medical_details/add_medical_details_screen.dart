@@ -1,29 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:swasthya/view/add_medical_details/sdd_medicall_details_controller.dart';
 import 'package:swasthya/view/core/colors.dart';
-import 'package:swasthya/view/profile_screen/profile_screen.dart';
-
 import '../bottom_navigation_bar/navigation_screen.dart';
 import '../core/constent_size.dart';
-import '../profile_screen/profile_screen_controller.dart';
 
-class AddMedicalDetailsScreen extends StatefulWidget {
+class AddMedicalDetailsScreen extends StatelessWidget {
   AddMedicalDetailsScreen({super.key, int? index});
 
-  @override
-  State<AddMedicalDetailsScreen> createState() => _AddMedicalDetailsScreenState();
-}
-
-class _AddMedicalDetailsScreenState extends State<AddMedicalDetailsScreen> {
-
-  AddMedicalDetailsController medicalDetailsScreenController = Get.find();
-
-  ProfileScreenController proScreenController = Get.find();
-  TextEditingController dateinput = TextEditingController();
+ 
+  final medicalDetailsScreenController = Get.put(AddMedicalDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +35,9 @@ class _AddMedicalDetailsScreenState extends State<AddMedicalDetailsScreen> {
               color: Colors.black,
             )),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(
@@ -95,39 +82,33 @@ class _AddMedicalDetailsScreenState extends State<AddMedicalDetailsScreen> {
                 ),
               ),
               h2,
-               TextFormField(
-                    // initialValue:updateMedDataController.dateinput.text ,
+              GetBuilder<AddMedicalDetailsController>(
+                builder: (_) {
+                  return TextFormField(
                     readOnly: true,
-                    controller: dateinput,
+                    controller: medicalDetailsScreenController.dateinput,
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime(
-                              2000), //DateTime.now() - not to allow to choose before today.
+                          firstDate: DateTime(2000),
                           lastDate: DateTime(2101));
-
+        
                       if (pickedDate != null) {
                         print(pickedDate);
                         String formattedDate =
-                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                            DateFormat('dd-MM-yyyy').format(pickedDate);
                         print(
                             formattedDate); //formatted date output using intl package =>  2021-03-16
-
-                        setState(() {
-                          dateinput.text =
-                              formattedDate; //set output date to TextField value.
-                        });
+        
+                        medicalDetailsScreenController.dateinput.text =
+                            formattedDate; //set output date to TextField value.
+        
                       } else {
                         print("Date is not selected");
                       }
-                      medicalDetailsScreenController.date =
-                          dateinput.text;
-                    },
-                    onChanged: (value) {
-                      medicalDetailsScreenController.date =
-                          dateinput.text;
-                      print(medicalDetailsScreenController.date);
+                      medicalDetailsScreenController.date.value =
+                          medicalDetailsScreenController.dateinput.text;
                     },
                     keyboardType: TextInputType.none,
                     decoration: InputDecoration(
@@ -160,7 +141,9 @@ class _AddMedicalDetailsScreenState extends State<AddMedicalDetailsScreen> {
                         filled: true,
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.only(left: 20.0)),
-                  ),
+                  );
+                },
+              ),
               h2,
               ElevatedButton(
                 onPressed: () {
@@ -180,10 +163,19 @@ class _AddMedicalDetailsScreenState extends State<AddMedicalDetailsScreen> {
                     backgroundColor: appColor),
               ),
               h2,
+              Obx(
+                () => Text(
+                  medicalDetailsScreenController.fileImage.value == true
+                      ? "*One File Is Added"
+                      : '',
+                  style: TextStyle(fontSize: 18, color: Colors.red),
+                ),
+              ),
+              h1,
               ElevatedButton(
                 onPressed: () async {
                   await medicalDetailsScreenController.addMedicalDetails();
-                  await proScreenController.getUserMedicalDetails();
+                  // await proScreenController.getUserMedicalDetails();
                   await Get.off(BottumNavBarScreen());
                 },
                 child: Text(

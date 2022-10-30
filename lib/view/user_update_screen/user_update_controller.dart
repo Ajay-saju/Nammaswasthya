@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart' as dio;
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/main.dart';
 import 'package:swasthya/view/bottom_navigation_bar/navigation_screen.dart';
@@ -9,6 +10,8 @@ import 'package:swasthya/view/user_update_screen/user_profile_update_service.dar
 
 class UserUpdatecontroller extends GetxController {
   final userProfileUpdateService = UserProfileUpdateService();
+
+  TextEditingController dob = TextEditingController();
 
   
 

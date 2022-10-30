@@ -7,7 +7,6 @@ import 'package:swasthya/view/core/colors.dart';
 import 'package:swasthya/view/home_screen/otp_api_call.dart';
 import 'package:swasthya/view/home_screen/phone_no_verification_controller.dart';
 import 'package:swasthya/view/otp_verification_screen/otp_verification_screen.dart';
-
 import '../core/constent_size.dart';
 
 class PhoneNumberVerificationScreen extends StatelessWidget {
@@ -17,10 +16,6 @@ class PhoneNumberVerificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final phoneNOController = Get.put(PhoneNoVerificationController());
     final otpApiCall = OtpApiCall();
-    // GlobalKey<FormState>formK
-
-    // MediaQueryData queryData;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -74,7 +69,7 @@ class PhoneNumberVerificationScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Container(
-                  width: context.width*.9,
+                  width: context.width * .9,
                   height: 50,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
@@ -103,24 +98,13 @@ class PhoneNumberVerificationScreen extends StatelessWidget {
                       SizedBox(
                         width: context.width * 0.7,
                         child: Form(
-                          // autovalidateMode: AutovalidateMode.always,
-                          // key:formKey,
                           child: TextFormField(
-                            // controller: phoneNOController.mobileNO,
-
                             keyboardAppearance: Brightness.light,
-                            // controller: otpController,
-
                             textInputAction: TextInputAction.next,
                             onChanged: (value) {
                               phoneNOController.phoneNo = value;
                               print(phoneNOController.phoneNo);
                             },
-                            // onSaved: (newValue) {
-                            //   phoneNo = newValue;
-                            //   print(phoneNo);
-                            // },
-
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(10)
                             ],
@@ -129,8 +113,6 @@ class PhoneNumberVerificationScreen extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700),
                             keyboardType: TextInputType.phone,
-                            // keyboardAppearance: Brightness.light,
-                            // validator: ()=>null,
                             decoration: InputDecoration.collapsed(
                               hintText: 'Enter your mobile number',
                               hintStyle: TextStyle(
@@ -164,7 +146,8 @@ class PhoneNumberVerificationScreen extends StatelessWidget {
                       ),
                     )
                   : Text(""),
-              h2,h1,
+              h2,
+              h1,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Center(

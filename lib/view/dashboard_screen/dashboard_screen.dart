@@ -16,7 +16,7 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   // final otpVerificationController = Get.put(OtpVerificationController());
   final dashBordController = Get.put(DashBordController());
-  
+
   @override
   void initState() {
     super.initState();
@@ -62,11 +62,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         .userDetailsModel!.data!.profilePic !=
                                     ''
                                 ? CircleAvatar(
-                                    radius: 50,
-                                    backgroundImage: NetworkImage(
-                                        dashBordController.user_profilePick
-                                            .toString(),
-                                        scale: 20),
+                                    radius: 54,
+                                    backgroundColor: appColor,
+                                    child: CircleAvatar(
+                                      radius: 52,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                        radius: 50,
+                                        backgroundImage: NetworkImage(
+                                            dashBordController.user_profilePick
+                                                .toString(),
+                                            scale: 20),
+                                      ),
+                                    ),
                                   )
                                 : SvgPicture.asset(
                                     'asset/icons/User Photo.svg'),
@@ -74,8 +82,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               width: 20,
                             ),
                             Text(
-                              dashBordController.userDetailsModel!.data !=
-                                      null
+                              dashBordController.userDetailsModel!.data != null
                                   ? dashBordController
                                       .userDetailsModel!.data!.fullname!
                                       .toUpperCase()
@@ -122,8 +129,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               border:
                                   Border.all(width: 1, color: Colors.black)),
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 15),
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: Row(
                               children: [
                                 SizedBox(
@@ -156,8 +162,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     // keyboardAppearance: Brightness.light,
                                     // validator: ()=>null,
                                     decoration: InputDecoration.collapsed(
-                                      hintText:
-                                          'Select your doctor or symptom',
+                                      hintText: 'Select your doctor or symptom',
                                       hintStyle: TextStyle(
                                         color: Colors.black87,
                                         fontSize: 17,
@@ -201,8 +206,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 width: context.width * .7,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        width: 4, color: appColor)),
+                                    border:
+                                        Border.all(width: 4, color: appColor)),
                                 child: IconButton(
                                     onPressed: () {
                                       Get.to(AllCardScreen());

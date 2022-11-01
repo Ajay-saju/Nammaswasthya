@@ -176,7 +176,7 @@ class AddMedicalDetailsScreen extends StatelessWidget {
                 onPressed: () async {
                   await medicalDetailsScreenController.addMedicalDetails();
                   // await proScreenController.getUserMedicalDetails();
-                  await Get.off(BottumNavBarScreen());
+                  await Get.offAll(BottumNavBarScreen());
                 },
                 child: Text(
                   'Upload Medical Details',

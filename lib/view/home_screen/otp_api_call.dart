@@ -6,7 +6,7 @@ class OtpApiCall {
 
     print('APi is Workinnnnnnnngggggggggggggg');
     final baseUrl =
-    'http://cannyinfotech.in/api/mt/SendSMS?apikey=8mvzJQl58USZmpySsmBWOw&senderid=STUDYS&channel=TRANS&DCS=0&flashsms=0&number=${mobileNumber}&text=${otp}&route=15';
+    'http://cannyinfotech.in/api/mt/SendSMS?apikey=8mvzJQl58USZmpySsmBWOw&senderid=STUDYS&channel=TRANS&DCS=0&flashsms=0&number=${mobileNumber}&text=${otp} is the OTP to verify your mobile number with nammaswasthya&route=15';
         // 'http://cannyinfotech.in/api/mt/SendSMS?APIKEY=3ndM6QrNWUCt6EeFTJS09A&senderid=STUDNT&channel=Trans&DCS=0&flashsms=0&number=${mobileNumber}&text=${otp}&route=15';
     try {
       print(mobileNumber);

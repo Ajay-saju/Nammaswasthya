@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:swasthya/main.dart';
 import 'package:swasthya/view/splash_screen/spash_screen_controller.dart';
 
 
@@ -29,6 +30,7 @@ class _SpalshScreenState extends State<SpalshScreen> {
     );
     image2 = SvgPicture.asset('asset/icons/logo only.svg');
 
+    // if(prefer.getBool('bio')==true)
     splashScreenController.authenticateUser();
   }
 

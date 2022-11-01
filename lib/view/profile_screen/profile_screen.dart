@@ -138,79 +138,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                           ],
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 15),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.end,
-                      //     // crossAxisAlignment: CrossAxisAlignment.end,
-                      //     children: [
-                      //       Text(
-                      //         'Full Name',
-                      //         style: TextStyle(
-                      //             fontSize: 22,
-                      //             letterSpacing: 1.2,
-                      //             fontWeight: FontWeight.w800),
-                      //       ),
-                      //       SizedBox(
-                      //         height: 5,
-                      //       ),
-                      //       Text(
-                      //         'B+',
-                      //         style: TextStyle(
-                      //             fontSize: 20,
-                      //             letterSpacing: 1.2,
-                      //             fontWeight: FontWeight.w600),
-                      //       ),
-
-                      //       // Text('B+')
-                      //     ],
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 5,
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 15),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.end,
-                      //     children: [
-                      //       Text(
-                      //         'XX/XX/XXX',
-                      //         style: TextStyle(
-                      //             fontSize: 18,
-                      //             letterSpacing: 1.2,
-                      //             fontWeight: FontWeight.w500),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 5,
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 15),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.end,
-                      //     children: [
-                      //       Text(
-                      //         'B+',
-                      //         style: TextStyle(
-                      //             fontSize: 20,
-                      //             letterSpacing: 1.2,
-                      //             fontWeight: FontWeight.w600),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       h1,
                       Container(
                         height: 2,
-                        // thickness: 2,
                         color: appColor,
                       ),
                       Container(
                         height: 7,
-                        // thickness: 4,
                         color: Colors.grey[350],
                       ),
                       h1,
@@ -227,19 +161,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   color: appColor,
                                   borderRadius: BorderRadius.circular(30)),
                               controller: tabController,
-                              // labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
-
                               tabs: [
                                 Tab(
-                                  // height: 20,
                                   child: Text(
                                     'My Details',
                                     style: TextStyle(
                                         fontSize: 18,
-                                        // letterSpacing: 1.2,
-                                        // color: tabController.index == 0
-                                        //     ? Colors.white
-                                        //     : appColor,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
@@ -258,25 +185,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                                // Expanded(
-                                //   flex: 10,
-                                //   child: Tab(
-                                //     child: Container(
-                                //       width: 170,
-                                //       child: Text(
-                                //         'Medical History',
-                                //         textAlign: TextAlign.left,
-                                //         style: TextStyle(
-                                //             fontSize: 15,
-                                //             letterSpacing: 1.2,
-                                //             color: tabController.index == 1
-                                //                 ? Colors.white
-                                //                 : appColor,
-                                //             fontWeight: FontWeight.w600),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
                                 Tab(
                                   child: Container(
                                     width: 40,
@@ -348,7 +256,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                         .value
                                                         .data!
                                                         .email ==
-                                                    null
+                                                    ''
                                                 ? "example@gamil.com"
                                                 : profileScreenController
                                                     .getUserProfileDetails

@@ -39,13 +39,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               body: SafeArea(
                   child: RefreshIndicator(
                 displacement: 250,
-                backgroundColor: Colors.yellow,
+                // backgroundColor: Colors.yellow,
                 color: appColor,
                 strokeWidth: 3,
                 triggerMode: RefreshIndicatorTriggerMode.anywhere,
                 onRefresh: () async {
-                  dashBordController.loadHomePage();
-                  dashBordController.counting();
+                  Future.delayed(Duration(seconds: 1));
+                  await dashBordController.loadHomePage();
+                 await dashBordController.counting();
                 },
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -135,32 +136,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 SizedBox(
                                   width: context.width * 0.7,
                                   child: TextFormField(
-                                    // textAlign: TextAlign.center,
-                                    // controller: phoneNOController.mobileNO,
-
                                     keyboardAppearance: Brightness.light,
-                                    // controller: otpController,
-
                                     textInputAction: TextInputAction.next,
-                                    // onChanged: (value) {
-                                    //   phoneNOController.phoneNo = value;
-                                    //   print(phoneNOController.phoneNo);
-                                    // },
-                                    // onSaved: (newValue) {
-                                    //   phoneNo = newValue;
-                                    //   print(phoneNo);
-                                    // },
-
-                                    inputFormatters: [
-                                      // LengthLimitingTextInputFormatter(10)
-                                    ],
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400),
                                     keyboardType: TextInputType.name,
-                                    // keyboardAppearance: Brightness.light,
-                                    // validator: ()=>null,
                                     decoration: InputDecoration.collapsed(
                                       hintText: 'Select your doctor or symptom',
                                       hintStyle: TextStyle(
@@ -366,7 +348,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      h2,
+                      h1
                     ],
                   ),
                 ),

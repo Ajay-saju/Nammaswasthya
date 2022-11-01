@@ -4,21 +4,23 @@ import 'package:get/get.dart';
 import 'package:swasthya/view/otp_verification_screen/otp_verification_controller.dart';
 import '../core/colors.dart';
 import '../core/constent_size.dart';
+import '../home_screen/home_screen.dart';
 import '../home_screen/phone_no_verification_controller.dart';
 
+final otpVerificationController = Get.put(OtpVerificationController());
+
+final phoneNumberVerificationScreen = PhoneNumberVerificationScreen();
+
 class OtpVerificationScreen extends StatelessWidget {
-  final String enterdPhoneNumber;
-  final String otp;
+  final String no;
   OtpVerificationScreen({
     super.key,
-    required this.enterdPhoneNumber,
-    required this.otp,
+    required this.no,
   });
-  PhoneNoVerificationController phoneNoVerificationController =Get.find();
 
   @override
   Widget build(BuildContext context) {
-    final otpVerificationControll = OtpVerificationController();
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,9 +33,14 @@ class OtpVerificationScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 25, right: 20),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                      ),
                     ),
                     Text(
                       'Back',
@@ -71,7 +78,7 @@ class OtpVerificationScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "+91 $enterdPhoneNumber",
+              "+91 $no",
               style: TextStyle(
                   fontSize: 15, letterSpacing: 1, fontWeight: FontWeight.w700),
             ),
@@ -82,7 +89,7 @@ class OtpVerificationScreen extends StatelessWidget {
               inputFormatters: [LengthLimitingTextInputFormatter(4)],
               keyboardType: TextInputType.number,
               onChanged: (value) {
-                otpVerificationControll.enterdOtp = value;
+                otpVerificationController.enterdOtp = value;
               },
               style: const TextStyle(
                   color: Colors.black,
@@ -102,29 +109,23 @@ class OtpVerificationScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     fontSize: 14)),
             h1,
-            InkWell(
-              onTap: (){
-                // phoneNoVerificationController.getHttp();
-
-              },
-              child: Text('Resend OTP in ',
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14)),
-            ),
+            Obx(() => Text(
+                'Resend OTP in ${otpVerificationController.seconds} sec ',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14))),
             h2,
             h1,
             ElevatedButton(
               onPressed: () async {
-                print(otpVerificationControll.enterdOtp);
-                print(otp);
-                if (otpVerificationControll.enterdOtp == otp) {
-                  await otpVerificationControll.userLogin(
-                      enterdPhoneNumber, 'yes');
+                print(otpVerificationController.enterdOtp);
+
+                if (otpVerificationController.enterdOtp ==
+                    otpVerificationController.otp.value) {
+                  await otpVerificationController.userLogin(no, 'yes');
                 } else {
-                  await otpVerificationControll.userLogin(
-                      enterdPhoneNumber, 'no');
+                  await otpVerificationController.userLogin(no, 'no');
 
                   Get.defaultDialog(
                       title: 'Wrong OTP',

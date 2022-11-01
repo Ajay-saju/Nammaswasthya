@@ -191,7 +191,7 @@ class UpdateMedicalDetails extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   await updateMedDataController.updateMedData(postId);
-                   await Get.off(BottumNavBarScreen());
+                   await Get.offAll(BottumNavBarScreen());
                 },
                 child: Text(
                   'Upload Medical Details',

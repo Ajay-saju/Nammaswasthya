@@ -1,14 +1,76 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/main.dart';
+import 'package:swasthya/view/home_screen/otp_api_call.dart';
 import '../bottom_navigation_bar/navigation_screen.dart';
+import '../home_screen/home_screen.dart';
 import 'login_api_model/login_api_call.dart';
 import 'login_api_model/login_model_class.dart';
+import 'otp_verification_screen.dart';
 
 class OtpVerificationController extends GetxController {
+  final otpApiCall = OtpApiCall();
+  final phoneNumberVerificationScreen = PhoneNumberVerificationScreen();
+
+  @override
+  void onInit() {
+    isStopTimer.value = true;
+    otpGenarate(
+        phoneNumberVerificationScreen.phoneNOController.phoneNo.toString());
+    startTimer();
+    var name = prefer.getString('name').toString();
+    print(
+        "==========================================================================$name");
+
+    super.onInit();
+  }
+
+  static const maxSeconds = 60;
+  Timer? countdownTimer;
+  Duration myDuration = Duration(seconds: 30);
+  RxInt seconds = maxSeconds.obs;
+  var isStopTimer = true.obs;
+
+  var otp = ''.obs;
+  void startTimer() {
+    countdownTimer = Timer.periodic(Duration(seconds: 1), (_) {
+      if (seconds > 0 && isStopTimer == true) {
+        seconds--;
+        print(seconds);
+      } else {
+        seconds.value = 60;
+      
+          otpGenarate(phoneNumberVerificationScreen.phoneNOController.phoneNo
+              .toString());
+        
+      }
+    });
+  }
+
+  otpGenarate(String mobileNumber) {
+    if(isStopTimer==true){
+       print(
+        'Otp veeeeeeeeeeeeeeeeeeeeeeeeeeeendum work ayiiiiiiiiiiiiiiiiiiiiiiiii');
+   
+      otp.value = grnarateOtp().toString();
+    }
+   
+    
+
+    // otpApiCall.getHttp(otp.value, mobileNumber);
+  }
+
+  int grnarateOtp() {
+    var rng = Random();
+
+    var otp = (rng.nextInt(5000) + 1001);
+    print(otp);
+    return otp;
+  }
+
   String enterdOtp = '';
 
   var full_name;
@@ -28,8 +90,6 @@ class OtpVerificationController extends GetxController {
       final response =
           await userPhoneNumberVerificationApiCall.userLoginCheck(numberVerifi);
 
-      // log(response.data);
-      // log(response.statusMessage.toString());
       var jsonFi = jsonDecode(response.data);
 
       var js = jsonFi["status"];
@@ -37,10 +97,6 @@ class OtpVerificationController extends GetxController {
 
       if (js == "success") {
         print("checking1");
-        // Get.defaultDialog(
-        //     title: 'Success', middleText: 'Your mobile number verified');
-
-        // print('login model  :${response.data}');
 
         userloginModel.value = UserLogin.fromJson(jsonFi);
 
@@ -53,8 +109,10 @@ class OtpVerificationController extends GetxController {
             'city', userloginModel.value.data!.city.toString());
         print(prefer.getString('name'));
 
-        Timer(Duration(seconds: 1), () {
-          Get.to(() => BottumNavBarScreen());
+        Timer(Duration(milliseconds: 1), () {
+          isStopTimer.value = false;
+          print(isStopTimer.value.toString());
+          Get.offAll(() => BottumNavBarScreen());
         });
       } else {
         Get.defaultDialog(

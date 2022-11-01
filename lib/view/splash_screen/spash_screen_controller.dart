@@ -14,10 +14,9 @@ class SplashScreenController extends GetxController {
   var isStrong = false.obs;
   var isUserAuthenticated = false.obs;
 
-  void getAllBioMetrics() async {
+  Future<bool> getAllBioMetrics() async {
     bool hasLocalOthentication = await localAuth.canCheckBiometrics;
-    bool hasPinlock = await localAuth.isDeviceSupported();
-    print(hasPinlock.toString());
+
     final bool canAuthenticate =
         hasLocalOthentication || await localAuth.isDeviceSupported();
 
@@ -29,31 +28,58 @@ class SplashScreenController extends GetxController {
       hasFaceLock.value = availableBiometric.contains(BiometricType.face);
       hasFingerPrintLock.value =
           availableBiometric.contains(BiometricType.fingerprint);
+      return true;
     } else {
       Get.snackbar('Error', 'LocalAuthentication  is not available',
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red);
+      return false;
     }
   }
 
+  // authContoll() async {
+  //   var bio = prefer.getBool('bio');
+  //   if (bio == true) {
+  //     authenticateUser();
+  //   } else
+  //     Get.offAll(PhoneNumberVerificationScreen());
+  // }
+
   void authenticateUser() async {
-    getAllBioMetrics();
-    try {
-      isUserAuthenticated.value = await localAuth.authenticate(
-          localizedReason: 'Authenticate YourSelf',
-          options: AuthenticationOptions(
-              biometricOnly: true, useErrorDialogs: true, stickyAuth: true),
-          authMessages: []);
 
-      if (isUserAuthenticated.value) {
-        if (prefer.getString('id') == null)
-          Get.to(const PhoneNumberVerificationScreen());
-        else
-          Get.to(BottumNavBarScreen());
-      }
+    bool yes = await getAllBioMetrics();
 
-      print(isUserAuthenticated.value);
-    } on PlatformException catch (e) {}
+    if (yes) {
+      try {
+        isUserAuthenticated.value = await localAuth.authenticate(
+            localizedReason: 'Authenticate YourSelf',
+            options: AuthenticationOptions(
+                biometricOnly: true, useErrorDialogs: true, stickyAuth: true),
+            authMessages: []);
+
+        if (isUserAuthenticated.value) {
+          if (prefer.getString('id') == null)
+            Get.offAll(PhoneNumberVerificationScreen());
+          else
+            Get.offAll(BottumNavBarScreen());
+        }
+
+        print(isUserAuthenticated.value);
+      } on PlatformException catch (e) {}
+    } else {
+      try {
+        bool pass = await localAuth.authenticate(
+          localizedReason: 'Authenticate with pattern/pin/passcode',
+        );
+        if (pass) {
+          if (prefer.getString('id') == null)
+            Get.offAll(PhoneNumberVerificationScreen());
+          else
+            Get.offAll(BottumNavBarScreen());
+        }
+        print(isUserAuthenticated.value);
+      } on PlatformException catch (e) {}
+    }
   }
 }

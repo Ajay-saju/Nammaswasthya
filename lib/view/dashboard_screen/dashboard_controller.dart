@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:swasthya/view/dashboard_screen/counter_api_call.dart';
 import 'package:swasthya/view/dashboard_screen/counter_call_model.dart';
 import 'package:swasthya/view/dashboard_screen/user_details_api_call.dart';

@@ -34,6 +34,17 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
+    final gender = profileScreenController
+        .getUserProfileDetails.value.data!.gender
+        .toString();
+    String newGender = '';
+    for (var i = 0; i < gender.length; i++) {
+      if (i == 0) {
+        newGender = gender[0].toUpperCase();
+      } else {
+        newGender = newGender + gender[i];
+      }
+    }
     TabController tabController = TabController(length: 3, vsync: this);
     return Obx(
       () => Scaffold(
@@ -116,11 +127,17 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     ),
                                     Text(
                                       profileScreenController
-                                                  .getUserProfileDetails
-                                                  .value
-                                                  .data!
-                                                  .bloodGroup ==
-                                              null
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .bloodGroup ==
+                                                  null ||
+                                              profileScreenController
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .bloodGroup ==
+                                                  'null'
                                           ? ''
                                           : profileScreenController
                                               .getUserProfileDetails
@@ -152,6 +169,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Container(
                             height: 50,
+                            width: context.width*1,
                             child: TabBar(
                               isScrollable: true,
                               unselectedLabelColor:
@@ -166,6 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   child: Text(
                                     'My Details',
                                     style: TextStyle(
+                                      letterSpacing: 0.5,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                                   ),
@@ -177,11 +196,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   child: Text(
                                     'Medical History',
                                     style: TextStyle(
+                                      letterSpacing: 0.5,
                                         fontSize: 18,
-                                        // letterSpacing: 1.2,
-                                        // color: tabController.index == 0
-                                        //     ? Colors.white
-                                        //     : appColor,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
@@ -191,11 +207,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     child: Text(
                                       'Card',
                                       style: TextStyle(
+                                        letterSpacing: 0.5,
                                           fontSize: 18,
-                                          // letterSpacing: 1.2,
-                                          // color: tabController.index == 2
-                                          //     ? Colors.white
-                                          //     : appColor,
                                           fontWeight: FontWeight.w600),
                                     ),
                                   ),
@@ -213,360 +226,407 @@ class _ProfileScreenState extends State<ProfileScreen>
                           child: TabBarView(
                         controller: tabController,
                         children: [
-                          Column(
-                            children: [
-                              RefreshIndicator(
-                                color: appColor,
-                                onRefresh: () async {
-                                  Future.delayed(Duration(seconds: 1));
-                                  await profileScreenController
-                                      .getUserProfileData();
-                                },
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  physics: AlwaysScrollableScrollPhysics(),
-                                  child: Column(
-                                    children: [
-                                      h2,
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(8.5),
-                                            border: Border.all(
-                                                color: Colors.grey,
-                                                width: 1.5)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 12, top: 8),
-                                          child: Text(
-                                            profileScreenController
-                                                        .getUserProfileDetails
-                                                        .value
-                                                        .data!
-                                                        .email ==
-                                                    ''
-                                                ? "example@gamil.com"
-                                                : profileScreenController
-                                                    .getUserProfileDetails
-                                                    .value
-                                                    .data!
-                                                    .email
-                                                    .toString(),
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black54,
-                                                letterSpacing: 1.2,
-                                                fontWeight: FontWeight.w600),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                RefreshIndicator(
+                                  color: appColor,
+                                  onRefresh: () async {
+                                    Future.delayed(Duration(seconds: 1));
+                                    await profileScreenController
+                                        .getUserProfileData();
+                                  },
+                                  child: SingleChildScrollView(
+                                    // scrollDirection: Axis.vertical,
+                                    // physics: AlwaysScrollableScrollPhysics(),
+                                    child: Column(
+                                      children: [
+                                        h2,
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(8.5),
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1.5)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 12, top: 8),
+                                            child: Text(
+                                              profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .email ==
+                                                          null ||
+                                                      profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .email ==
+                                                          'null'
+                                                  ? "example@gmail.com"
+                                                  : profileScreenController
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .email
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black54,
+                                                  letterSpacing: 1.2,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      h1,
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(8.5),
-                                            border: Border.all(
-                                                color: Colors.grey,
-                                                width: 1.5)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 12, top: 8),
-                                          child: Text(
-                                            profileScreenController
-                                                        .getUserProfileDetails
-                                                        .value
-                                                        .data!
-                                                        .dob ==
-                                                    null
-                                                ? "XX/XX/XXX"
-                                                : profileScreenController
-                                                    .getUserProfileDetails
-                                                    .value
-                                                    .data!
-                                                    .dob
-                                                    .toString(),
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black54,
-                                                letterSpacing: 1.2,
-                                                fontWeight: FontWeight.w600),
+                                        h1,
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(8.5),
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1.5)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 12, top: 8),
+                                            child: Text(
+                                              profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .dob ==
+                                                          null ||
+                                                      profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .dob ==
+                                                          'null'
+                                                  ? "XX/XX/XXX"
+                                                  : profileScreenController
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .dob
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black54,
+                                                  letterSpacing: 1.2,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      h1,
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(8.5),
-                                            border: Border.all(
-                                                color: Colors.grey,
-                                                width: 1.5)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 12, top: 8),
-                                          child: Text(
-                                            profileScreenController
-                                                        .getUserProfileDetails
-                                                        .value
-                                                        .data!
-                                                        .gender ==
-                                                    null
-                                                ? "Gender"
-                                                : profileScreenController
-                                                    .getUserProfileDetails
-                                                    .value
-                                                    .data!
-                                                    .gender
-                                                    .toString(),
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black54,
-                                                letterSpacing: 1.2,
-                                                fontWeight: FontWeight.w600),
+                                        h1,
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(8.5),
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1.5)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 12, top: 8),
+                                            child: Text(
+                                              profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .gender ==
+                                                          null ||
+                                                      profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .gender ==
+                                                          ''
+                                                  ? "Gender"
+                                                  : profileScreenController
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .gender
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black54,
+                                                  letterSpacing: 1.2,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      h1,
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(8.5),
-                                            border: Border.all(
-                                                color: Colors.grey,
-                                                width: 1.5)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 12, top: 8),
-                                          child: Text(
-                                            profileScreenController
-                                                        .getUserProfileDetails
-                                                        .value
-                                                        .data!
-                                                        .occupation ==
-                                                    null
-                                                ? "Occupation - Nill"
-                                                : profileScreenController
-                                                    .getUserProfileDetails
-                                                    .value
-                                                    .data!
-                                                    .occupation
-                                                    .toString(),
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black54,
-                                                letterSpacing: 1.2,
-                                                fontWeight: FontWeight.w600),
+                                        h1,
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(8.5),
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1.5)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 12, top: 8),
+                                            child: Text(
+                                              profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .occupation ==
+                                                          null ||
+                                                      profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .occupation ==
+                                                          'null'
+                                                  ? "Occupation - Nill"
+                                                  : profileScreenController
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .occupation
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black54,
+                                                  letterSpacing: 1.2,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      h1,
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(8.5),
-                                            border: Border.all(
-                                                color: Colors.grey,
-                                                width: 1.5)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 12, top: 8),
-                                          child: Text(
-                                            profileScreenController
-                                                        .getUserProfileDetails
-                                                        .value
-                                                        .data!
-                                                        .state ==
-                                                    ""
-                                                ? "State"
-                                                : profileScreenController
-                                                    .getUserProfileDetails
-                                                    .value
-                                                    .data!
-                                                    .state
-                                                    .toString(),
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black54,
-                                                letterSpacing: 1.2,
-                                                fontWeight: FontWeight.w600),
+                                        h1,
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(8.5),
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1.5)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 12, top: 8),
+                                            child: Text(
+                                              profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .state ==
+                                                          null ||
+                                                      profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .state ==
+                                                          'null'
+                                                  ? "State"
+                                                  : profileScreenController
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .state
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black54,
+                                                  letterSpacing: 1.2,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      h1,
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(8.5),
-                                            border: Border.all(
-                                                color: Colors.grey,
-                                                width: 1.5)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 12, top: 8),
-                                          child: Text(
-                                            profileScreenController
-                                                        .getUserProfileDetails
-                                                        .value
-                                                        .data!
-                                                        .city ==
-                                                    ""
-                                                ? "City"
-                                                : profileScreenController
-                                                    .getUserProfileDetails
-                                                    .value
-                                                    .data!
-                                                    .city
-                                                    .toString(),
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black54,
-                                                letterSpacing: 1.2,
-                                                fontWeight: FontWeight.w600),
+                                        h1,
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(8.5),
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1.5)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 12, top: 8),
+                                            child: Text(
+                                              profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .city ==
+                                                          null ||
+                                                      profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .city ==
+                                                          'null'
+                                                  ? "City"
+                                                  : profileScreenController
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .city
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black54,
+                                                  letterSpacing: 1.2,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      h1,
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 1,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(8.5),
-                                            border: Border.all(
-                                                color: Colors.grey,
-                                                width: 1.5)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 12, top: 8),
-                                          child: Text(
-                                            profileScreenController
-                                                        .getUserProfileDetails
-                                                        .value
-                                                        .data!
-                                                        .pincode ==
-                                                    ""
-                                                ? "Pincode"
-                                                : profileScreenController
-                                                    .getUserProfileDetails
-                                                    .value
-                                                    .data!
-                                                    .pincode
-                                                    .toString(),
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.black54,
-                                                letterSpacing: 1.2,
-                                                fontWeight: FontWeight.w600),
+                                        h1,
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 1,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(8.5),
+                                              border: Border.all(
+                                                  color: Colors.grey,
+                                                  width: 1.5)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 12, top: 8),
+                                            child: Text(
+                                              profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .pincode ==
+                                                          null ||
+                                                      profileScreenController
+                                                              .getUserProfileDetails
+                                                              .value
+                                                              .data!
+                                                              .pincode ==
+                                                          'null'
+                                                  ? "Pincode"
+                                                  : profileScreenController
+                                                      .getUserProfileDetails
+                                                      .value
+                                                      .data!
+                                                      .pincode
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.black54,
+                                                  letterSpacing: 1.2,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      h2,
-                                      h1,
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Get.to(UserProfileUpdateScreen());
-                                        },
-                                        child: Text(
-                                          'Update',
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
+                                        h2,
+                                        h1,
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Get.to(UserProfileUpdateScreen());
+                                          },
+                                          child: Text(
+                                            'Update',
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                              fixedSize: Size(180, 45),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30)),
+                                              backgroundColor: Colors.green),
                                         ),
-                                        style: ElevatedButton.styleFrom(
-                                            fixedSize: Size(180, 45),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(30)),
-                                            backgroundColor: Colors.green),
-                                      )
-                                    ],
+                                        h2,
+                                        h2,
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           profileScreenController
                                           .getMedicalDetails.value.data ==
@@ -577,7 +637,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               ? Center(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      Get.to(AddMedicalDetailsScreen());
+                                      Get.off(AddMedicalDetailsScreen());
                                     },
                                     child: Text(
                                       'Add',
@@ -711,10 +771,19 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                         h1,
                                                         InkWell(
                                                           onTap: () {
-                                                            Get.to(
-                                                                ViewFileScreen(
-                                                              index: index,
-                                                            ));
+                                                            profileScreenController
+                                                                        .getMedicalDetails
+                                                                        .value
+                                                                        .data![
+                                                                            index]
+                                                                        .file ==
+                                                                    ''
+                                                                ? null
+                                                                : Get.to(
+                                                                    ViewFileScreen(
+                                                                    index:
+                                                                        index,
+                                                                  ));
                                                             // profileScreenController
                                                             //         .fileToDisplay =
                                                             //     profileScreenController
@@ -735,7 +804,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                                     width: 1)),
                                                             child: Center(
                                                               child: Text(
-                                                                'View File',
+                                                                profileScreenController
+                                                                            .getMedicalDetails
+                                                                            .value
+                                                                            .data![index]
+                                                                            .file ==
+                                                                        ''
+                                                                    ? "No file available"
+                                                                    : 'View File',
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         18,

@@ -9,7 +9,6 @@ import '../core/constent_size.dart';
 class AddMedicalDetailsScreen extends StatelessWidget {
   AddMedicalDetailsScreen({super.key, int? index});
 
- 
   final medicalDetailsScreenController = Get.put(AddMedicalDetailsController());
 
   @override
@@ -43,7 +42,6 @@ class AddMedicalDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: 200,
                 child: TextFormField(
-                  // initialValue:proScreenController.getMedicalDetails.value.data[index].description.toString() ,
                   onChanged: (value) {
                     medicalDetailsScreenController.description = value;
                   },
@@ -78,7 +76,8 @@ class AddMedicalDetailsScreen extends StatelessWidget {
                       ),
                       filled: true,
                       fillColor: Colors.white,
-                      contentPadding: const EdgeInsets.only(left: 20.0)),
+                      contentPadding:
+                          const EdgeInsets.only(left: 20.0, top: 30)),
                 ),
               ),
               h2,
@@ -93,17 +92,15 @@ class AddMedicalDetailsScreen extends StatelessWidget {
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2101));
-        
+
                       if (pickedDate != null) {
                         print(pickedDate);
                         String formattedDate =
                             DateFormat('dd-MM-yyyy').format(pickedDate);
-                        print(
-                            formattedDate); //formatted date output using intl package =>  2021-03-16
-        
+                        print(formattedDate);
+
                         medicalDetailsScreenController.dateinput.text =
-                            formattedDate; //set output date to TextField value.
-        
+                            formattedDate;
                       } else {
                         print("Date is not selected");
                       }
@@ -174,9 +171,26 @@ class AddMedicalDetailsScreen extends StatelessWidget {
               h1,
               ElevatedButton(
                 onPressed: () async {
-                  await medicalDetailsScreenController.addMedicalDetails();
-                  // await proScreenController.getUserMedicalDetails();
-                  await Get.offAll(BottumNavBarScreen());
+                  if (medicalDetailsScreenController.description.isEmpty &&
+                      medicalDetailsScreenController.date.value.isEmpty) {
+                    Get.defaultDialog(
+                        title: 'Error',
+                        middleText:
+                            'Please enter your medical description and date');
+                  } else if (medicalDetailsScreenController
+                      .date.value.isEmpty) {
+                    Get.defaultDialog(
+                        title: 'Error', middleText: 'Please enter date');
+                  } else if (medicalDetailsScreenController
+                      .description.isEmpty) {
+                    Get.defaultDialog(
+                        title: 'Error',
+                        middleText: 'Please select medical file');
+                  } else {
+                    await medicalDetailsScreenController.addMedicalDetails();
+                    // await proScreenController.getUserMedicalDetails();
+                    await Get.offAll(BottumNavBarScreen());
+                  }
                 },
                 child: Text(
                   'Upload Medical Details',

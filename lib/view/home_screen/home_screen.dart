@@ -1,17 +1,18 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/view/core/colors.dart';
-import 'package:swasthya/view/home_screen/otp_api_call.dart';
 import 'package:swasthya/view/home_screen/phone_no_verification_controller.dart';
 import 'package:swasthya/view/otp_verification_screen/otp_verification_screen.dart';
 import '../core/constent_size.dart';
 
+
 class PhoneNumberVerificationScreen extends StatelessWidget {
   PhoneNumberVerificationScreen({super.key});
   final phoneNOController = Get.put(PhoneNoVerificationController());
+
+  // final controller =OtpVerificationController();
   //
 
   @override
@@ -182,25 +183,16 @@ class PhoneNumberVerificationScreen extends StatelessWidget {
     if (phoneNOController.phoneNo.isNotEmpty &&
         phoneNOController.phoneNo.value.length > 9) {
       phoneNOController.visibility.value = false;
-      // phoneNOController.otp.value = grnarateOtp().toString();
 
-      print(phoneNOController.phoneNo);
-      
+      phoneNOController.otpGenarate(phoneNOController.phoneNo.value);
 
-      Get.off(OtpVerificationScreen(no:phoneNOController.phoneNo.value ,));
+      Get.to(OtpVerificationScreen(
+        no: phoneNOController.phoneNo.value,
+      ));
     } else {
       phoneNOController.visibility.value = true;
     }
   }
 
-  // int grnarateOtp() {
-  //   var rng = Random();
-
-  //   var otp = (rng.nextInt(5000) + 1001);
-  //   // print(otp);
-
-  //   return otp;
-  // }
-
-  phoneNumberValidation(value) {}
+  
 }

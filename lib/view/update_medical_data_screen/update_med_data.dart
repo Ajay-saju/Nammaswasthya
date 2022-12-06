@@ -2,25 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/view/update_medical_data_screen/update_med_data_controller.dart';
 import 'package:intl/intl.dart';
+import 'package:swasthya/view/view_file_screen/view_file_screen.dart';
 import '../bottom_navigation_bar/navigation_screen.dart';
 import '../core/colors.dart';
 import '../core/constent_size.dart';
 import '../profile_screen/profile_screen_controller.dart';
 
-class UpdateMedicalDetails extends StatelessWidget {
+class UpdateMedicalDetails extends StatefulWidget {
   String postId;
   int index;
   UpdateMedicalDetails({Key? key, required this.postId, required this.index})
       : super(key: key);
 
   @override
+  State<UpdateMedicalDetails> createState() => _UpdateMedicalDetailsState();
+}
+
+class _UpdateMedicalDetailsState extends State<UpdateMedicalDetails> {
+  @override
   final updateMedDataController = Get.put(UpdateMedDataController());
+
   ProfileScreenController oldData = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    String date =
+        oldData.getMedicalDetails.value.data![widget.index].date.toString();
+    String description = oldData
+        .getMedicalDetails.value.data![widget.index].description
+        .toString();
     updateMedDataController.dateinput.text =
-        oldData.getMedicalDetails.value.data![index].date.toString();
+        oldData.getMedicalDetails.value.data![widget.index].date.toString();
+    print(oldData.getMedicalDetails.value.data![widget.index].date.toString());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -50,51 +63,59 @@ class UpdateMedicalDetails extends StatelessWidget {
               h2,
               SizedBox(
                 height: 200,
-                child: TextFormField(
-                  initialValue:
-                      oldData.getMedicalDetails.value.data![index].description,
-                  onChanged: (value) {
-                    updateMedDataController.description = value;
-                  },
-                  maxLines: 20,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: const BorderSide(color: Colors.black),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: const BorderSide(color: Colors.black),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: const BorderSide(color: Colors.grey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(
-                          color: Colors.black,
+                child: GetBuilder<UpdateMedDataController>(builder: (_) {
+                  return TextFormField(
+                    initialValue: oldData.getMedicalDetails.value
+                        .data![widget.index].description,
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        description = oldData.getMedicalDetails.value
+                            .data![widget.index].description
+                            .toString();
+                      } else {
+                        description = value;
+                      }
+                    },
+                    maxLines: 20,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: const BorderSide(color: Colors.black),
                         ),
-                      ),
-                      hintText: "Enter Descriptions...",
-                      hintStyle: TextStyle(
-                        fontFamily: "Nunito",
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: const EdgeInsets.only(left: 20.0)),
-                ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: const BorderSide(color: Colors.black),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                        ),
+                        hintText: "Enter Descriptions...",
+                        hintStyle: TextStyle(
+                          fontFamily: "Nunito",
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding:
+                            const EdgeInsets.only(left: 20.0, top: 30)),
+                  );
+                }),
               ),
               h2,
               GetBuilder<UpdateMedDataController>(
                 builder: (_) {
                   return TextFormField(
-                    // initialValue:updateMedDataController.dateinput.text ,
                     readOnly: true,
                     controller: updateMedDataController.dateinput,
                     onTap: () async {
@@ -116,16 +137,13 @@ class UpdateMedicalDetails extends StatelessWidget {
                             formattedDate; //set output date to TextField value.
 
                       } else {
+                        updateMedDataController.dateinput.text = oldData
+                            .getMedicalDetails.value.data![widget.index].date
+                            .toString();
                         print("Date is not selected");
                       }
-                      updateMedDataController.date.value =
-                          updateMedDataController.dateinput.text;
+                      date = updateMedDataController.dateinput.text;
                     },
-                    // onChanged: (value) {
-                    //   updateMedDataController.date.value =
-                    //       updateMedDataController.dateinput.text;
-                    //   // print(updateMedDataController.date);
-                    // },
                     keyboardType: TextInputType.none,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -160,13 +178,27 @@ class UpdateMedicalDetails extends StatelessWidget {
                   );
                 },
               ),
-              h2,
+              h1,
+              Obx(() =>
+               oldData.getMedicalDetails.value.data![widget.index].file !=''?
+               TextButton(
+                  onPressed: () {
+                    Get.to(ViewFileScreen(index: widget.index));
+                  },
+                  child: Text(
+                    'View File',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  )):SizedBox(),
+                  ),
               ElevatedButton(
                 onPressed: () async {
                   await updateMedDataController.getFile();
                 },
                 child: Text(
-                  'Add File',
+                  oldData.getMedicalDetails.value.data![widget.index].file ==
+                          null && oldData.getMedicalDetails.value.data![widget.index].file ==''
+                      ? 'Add file'
+                      : 'Change File',
                   style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -178,7 +210,7 @@ class UpdateMedicalDetails extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5)),
                     backgroundColor: appColor),
               ),
-              h2,
+              h1,
               Obx(
                 () => Text(
                   updateMedDataController.fileImage.value == true
@@ -190,8 +222,9 @@ class UpdateMedicalDetails extends StatelessWidget {
               h1,
               ElevatedButton(
                 onPressed: () async {
-                  await updateMedDataController.updateMedData(postId);
-                   await Get.offAll(BottumNavBarScreen());
+                  await updateMedDataController.updateMedData(
+                      widget.postId, description, date);
+                  await Get.offAll(BottumNavBarScreen());
                 },
                 child: Text(
                   'Upload Medical Details',

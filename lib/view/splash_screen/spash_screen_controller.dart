@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import '../../main.dart';
@@ -47,39 +46,48 @@ class SplashScreenController extends GetxController {
   // }
 
   void authenticateUser() async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      Future.delayed(Duration(seconds: 4));
 
-    bool yes = await getAllBioMetrics();
-
-    if (yes) {
-      try {
-        isUserAuthenticated.value = await localAuth.authenticate(
-            localizedReason: 'Authenticate YourSelf',
-            options: AuthenticationOptions(
-                biometricOnly: true, useErrorDialogs: true, stickyAuth: true),
-            authMessages: []);
-
-        if (isUserAuthenticated.value) {
-          if (prefer.getString('id') == null)
-            Get.offAll(PhoneNumberVerificationScreen());
-          else
-            Get.offAll(BottumNavBarScreen());
-        }
-
-        print(isUserAuthenticated.value);
-      } on PlatformException catch (e) {}
-    } else {
-      try {
-        bool pass = await localAuth.authenticate(
-          localizedReason: 'Authenticate with pattern/pin/passcode',
-        );
-        if (pass) {
-          if (prefer.getString('id') == null)
-            Get.offAll(PhoneNumberVerificationScreen());
-          else
-            Get.offAll(BottumNavBarScreen());
-        }
-        print(isUserAuthenticated.value);
-      } on PlatformException catch (e) {}
-    }
+      if (prefer.getString('id') == null)
+        await Get.offAll(PhoneNumberVerificationScreen());
+      else
+        await Get.offAll(BottumNavBarScreen());
+    });
   }
+
+  //   bool yes = await getAllBioMetrics();
+
+  //   if (yes) {
+  //     try {
+  //       isUserAuthenticated.value = await localAuth.authenticate(
+  //           localizedReason: 'Authenticate YourSelf',
+  //           options: AuthenticationOptions(
+  //               biometricOnly: true, useErrorDialogs: true, stickyAuth: true),
+  //           authMessages: []);
+
+  //       if (isUserAuthenticated.value) {
+  //         if (prefer.getString('id') == null)
+  //           Get.offAll(PhoneNumberVerificationScreen());
+  //         else
+  //           Get.offAll(BottumNavBarScreen());
+  //       }
+
+  //       print(isUserAuthenticated.value);
+  //     } on PlatformException catch (e) {}
+  //   } else {
+  //     try {
+  //       bool pass = await localAuth.authenticate(
+  //         localizedReason: 'Authenticate with pattern/pin/passcode',
+  //       );
+  //       if (pass) {
+  //         if (prefer.getString('id') == null)
+  //           Get.offAll(PhoneNumberVerificationScreen());
+  //         else
+  //           Get.offAll(BottumNavBarScreen());
+  //       }
+  //       print(isUserAuthenticated.value);
+  //     } on PlatformException catch (e) {}
+  //   }
+  // }
 }

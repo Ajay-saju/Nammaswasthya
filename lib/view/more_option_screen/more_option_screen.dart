@@ -4,7 +4,6 @@ import 'package:swasthya/main.dart';
 import 'package:swasthya/view/core/colors.dart';
 import '../core/constent_size.dart';
 import '../home_screen/home_screen.dart';
-import '../otp_verification_screen/otp_verification_controller.dart';
 
 class MoreOptionScreen extends StatefulWidget {
   MoreOptionScreen({super.key});
@@ -16,7 +15,7 @@ class MoreOptionScreen extends StatefulWidget {
 class _MoreOptionScreenState extends State<MoreOptionScreen> {
 // final moreOptController=Get.put(MoreOptController);
   var bio = prefer.getBool('bio');
-    // OtpVerificationController  controller =Get.find ();
+// final   OtpVerificationController controller = Get.find();
 // var bio = false;
 
   @override
@@ -31,9 +30,10 @@ class _MoreOptionScreenState extends State<MoreOptionScreen> {
             child: InkWell(
               onTap: () {
                 // controller.isStopTimer.value = true;
+                // print(controller.isStopTimer.value.toString());
                 prefer.remove('name');
                 prefer.remove('id');
-                Get.to(PhoneNumberVerificationScreen());
+                Get.off(PhoneNumberVerificationScreen());
               },
               child: Row(
                 children: [

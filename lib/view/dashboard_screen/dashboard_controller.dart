@@ -5,7 +5,6 @@ import 'package:swasthya/view/dashboard_screen/counter_api_call.dart';
 import 'package:swasthya/view/dashboard_screen/counter_call_model.dart';
 import 'package:swasthya/view/dashboard_screen/user_details_api_call.dart';
 import 'package:swasthya/view/dashboard_screen/userdetails_model.dart';
-
 import '../../main.dart';
 
 class DashBordController extends GetxController {
@@ -59,7 +58,8 @@ class DashBordController extends GetxController {
 
       counterCallingModel = CounterCallingModel.fromJson(jsonFile);
 
-      print(counterCallingModel!.data![0].counterNo);
+      print(counterCallingModel!.data![0].corporateCounter.toString());
+      print(counterCallingModel!.data![0].userCounter.toString());
     } catch (e) {}
     return null;
   }

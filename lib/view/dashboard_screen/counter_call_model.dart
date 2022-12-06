@@ -25,23 +25,30 @@ class CounterCallingModel {
 }
 
 class Data {
-  String? id;
-  String? counterNo;
-  String? counterType;
+  String? userCounter;
+  String? userType;
+  String? corporateCounter;
+  String? corporateType;
 
-  Data({this.id, this.counterNo, this.counterType});
+  Data(
+      {this.userCounter,
+      this.userType,
+      this.corporateCounter,
+      this.corporateType});
 
   Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    counterNo = json['counter_no'];
-    counterType = json['counter_type'];
+    userCounter = json['user_counter'];
+    userType = json['user_type'];
+    corporateCounter = json['corporate_counter'];
+    corporateType = json['corporate_type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['counter_no'] = this.counterNo;
-    data['counter_type'] = this.counterType;
+    data['user_counter'] = this.userCounter;
+    data['user_type'] = this.userType;
+    data['corporate_counter'] = this.corporateCounter;
+    data['corporate_type'] = this.corporateType;
     return data;
   }
 }

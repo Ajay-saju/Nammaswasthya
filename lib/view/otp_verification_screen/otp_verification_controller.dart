@@ -1,25 +1,21 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:swasthya/main.dart';
-import 'package:swasthya/view/home_screen/otp_api_call.dart';
 import '../bottom_navigation_bar/navigation_screen.dart';
-import '../home_screen/home_screen.dart';
 import 'login_api_model/login_api_call.dart';
 import 'login_api_model/login_model_class.dart';
-import 'otp_verification_screen.dart';
+import 'package:image_cropper/image_cropper.dart';
+
 
 class OtpVerificationController extends GetxController {
-  final otpApiCall = OtpApiCall();
-  final phoneNumberVerificationScreen = PhoneNumberVerificationScreen();
+  
 
   @override
   void onInit() {
     isStopTimer.value = true;
-    otpGenarate(
-        phoneNumberVerificationScreen.phoneNOController.phoneNo.toString());
     startTimer();
     var name = prefer.getString('name').toString();
     print(
@@ -28,47 +24,33 @@ class OtpVerificationController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void dispose() {
+    isStopTimer.value = false;
+  }
+
   static const maxSeconds = 60;
   Timer? countdownTimer;
-  Duration myDuration = Duration(seconds: 30);
+
   RxInt seconds = maxSeconds.obs;
   var isStopTimer = true.obs;
+  var isVisible = false.obs;
 
-  var otp = ''.obs;
+  // void cropImage(FileImage imageFile )async{
+  //   CroppedFile croppedFile = await ImageCropper().cropImage(sourcePath:imageFile.path,aspectRatioPresets:[] );
+  // }
   void startTimer() {
     countdownTimer = Timer.periodic(Duration(seconds: 1), (_) {
       if (seconds > 0 && isStopTimer == true) {
         seconds--;
+        isVisible.value = false;
         print(seconds);
       } else {
-        seconds.value = 60;
-      
-          otpGenarate(phoneNumberVerificationScreen.phoneNOController.phoneNo
-              .toString());
+        isVisible.value = true;
+        isStopTimer.value = false;
         
       }
     });
-  }
-
-  otpGenarate(String mobileNumber) {
-    if(isStopTimer==true){
-       print(
-        'Otp veeeeeeeeeeeeeeeeeeeeeeeeeeeendum work ayiiiiiiiiiiiiiiiiiiiiiiiii');
-   
-      otp.value = grnarateOtp().toString();
-    }
-   
-    
-
-    // otpApiCall.getHttp(otp.value, mobileNumber);
-  }
-
-  int grnarateOtp() {
-    var rng = Random();
-
-    var otp = (rng.nextInt(5000) + 1001);
-    print(otp);
-    return otp;
   }
 
   String enterdOtp = '';
@@ -109,10 +91,10 @@ class OtpVerificationController extends GetxController {
             'city', userloginModel.value.data!.city.toString());
         print(prefer.getString('name'));
 
-        Timer(Duration(milliseconds: 1), () {
+        Timer(Duration(milliseconds: 5), () {
           isStopTimer.value = false;
           print(isStopTimer.value.toString());
-          Get.offAll(() => BottumNavBarScreen());
+          Get.off(() => BottumNavBarScreen());
         });
       } else {
         Get.defaultDialog(

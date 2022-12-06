@@ -39,17 +39,19 @@ class ViewFileScreen extends StatelessWidget {
             )),
       ),
       body: Center(
-        child: Container(
-          height: 400,
-          width: 300,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(fileController
-                      .getMedicalDetails.value.data![index].file
-                      .toString())),
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(width: 1.5, color: appColor)),
-        ),
+        child: fileController.getMedicalDetails.value.data![index].file == ''
+            ? Text('No file added')
+            : Container(
+                height: 400,
+                width: 300,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(fileController
+                            .getMedicalDetails.value.data![index].file
+                            .toString())),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(width: 1.5, color: appColor)),
+              ),
       ),
     );
   }

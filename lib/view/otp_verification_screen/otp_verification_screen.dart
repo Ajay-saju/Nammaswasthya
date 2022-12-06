@@ -4,12 +4,7 @@ import 'package:get/get.dart';
 import 'package:swasthya/view/otp_verification_screen/otp_verification_controller.dart';
 import '../core/colors.dart';
 import '../core/constent_size.dart';
-import '../home_screen/home_screen.dart';
 import '../home_screen/phone_no_verification_controller.dart';
-
-final otpVerificationController = Get.put(OtpVerificationController());
-
-final phoneNumberVerificationScreen = PhoneNumberVerificationScreen();
 
 class OtpVerificationScreen extends StatelessWidget {
   final String no;
@@ -18,9 +13,12 @@ class OtpVerificationScreen extends StatelessWidget {
     required this.no,
   });
 
+  final otpVerificationController = Get.put(OtpVerificationController());
+
+  PhoneNoVerificationController contoller = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -115,14 +113,29 @@ class OtpVerificationScreen extends StatelessWidget {
                     color: Colors.grey,
                     fontWeight: FontWeight.w500,
                     fontSize: 14))),
-            h2,
             h1,
+            Obx(() => otpVerificationController.isVisible == true
+                ? TextButton(
+                    onPressed: () {
+                      otpVerificationController.seconds.value = 60;
+                      otpVerificationController.isStopTimer.value = true;
+                      contoller.otpGenarate(no);
+                    },
+                    child: Text(
+                      'Resnd OTP',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ))
+                : SizedBox()),
+            h2,
             ElevatedButton(
               onPressed: () async {
                 print(otpVerificationController.enterdOtp);
 
                 if (otpVerificationController.enterdOtp ==
-                    otpVerificationController.otp.value) {
+                    contoller.otp.value) {
                   await otpVerificationController.userLogin(no, 'yes');
                 } else {
                   await otpVerificationController.userLogin(no, 'no');

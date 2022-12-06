@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -18,15 +16,15 @@ class CardScreenController extends GetxController {
   static const keySecret = "3wQnashnGoeS56aVWfpSYOZ7";
   final razorpay = Razorpay();
 
+  var status = ''.obs;
+  var paymentId = ''.obs;
+  var amount = ''.obs;
+  var cardType = ''.obs;
+
   Rx<GetAllCards> getallCardsModel = GetAllCards().obs;
   final subscriptionDetailsService = SubscriptionDetailsService();
 
-  Map<String, dynamic> cardDetails = {
-    // "user_id": prefer.getString('id').toString(),
-    // "card_type": "1",
-    // "amount": "1500",
-    // "payment_status": "success"
-  };
+  Map<String, dynamic> cardDetails = {};
 
   void onInit() {
     getAllCardDetails();
@@ -42,12 +40,15 @@ class CardScreenController extends GetxController {
   getCurrentCardDetails(
     String card_Type,
     String amount,
+    String status,
+    String paymentId,
   ) {
     cardDetails = {
       "user_id": prefer.getString('id').toString(),
       "card_type": card_Type,
       "amount": amount,
-      "payment_status": "success"
+      "payment_status": status,
+      "paymentId": paymentId
     };
   }
 
@@ -71,23 +72,36 @@ class CardScreenController extends GetxController {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    paymentId.value = response.paymentId.toString();
+    status.value = 'success';
+
+    getCurrentCardDetails(
+        cardType.value, amount.value, status.value, paymentId.value);
+
     subscriptionDetailsService.postSubscriptionDetails(cardDetails);
 
     Get.defaultDialog(
         title: 'Payment Success', titleStyle: TextStyle(color: Colors.green));
 
-        
-        Timer(Duration(seconds: 2), (){
-          Get.off(BottumNavBarScreen());
-
-        });
-
-        
+    Timer(Duration(seconds: 2), () {
+      Get.off(BottumNavBarScreen());
+    });
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
+    paymentId.value = '';
+    status.value = 'failed';
+    getCurrentCardDetails(
+        cardType.value, amount.value, status.value, paymentId.value);
+
+    subscriptionDetailsService.postSubscriptionDetails(cardDetails);
+
     Get.defaultDialog(
-        title: 'Payment Error', titleStyle: TextStyle(color: Colors.red));
+        title: 'Payment Failed', titleStyle: TextStyle(color: Colors.red));
+
+    Timer(Duration(seconds: 2), () {
+      Get.off(BottumNavBarScreen());
+    });
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -110,8 +124,6 @@ class CardScreenController extends GetxController {
       print(e.toString());
     }
   }
-
-  subscriptionDetails() {}
 
   @override
   void dispose() {

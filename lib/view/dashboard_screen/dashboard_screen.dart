@@ -14,7 +14,7 @@ class DashBoardScreen extends StatefulWidget {
 }
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
-  // final otpVerificationController = Get.put(OtpVerificationController());
+
   final dashBordController = Get.put(DashBordController());
 
   @override
@@ -26,7 +26,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final currentHeight =MediaQuery.of(context).size.height;
+  
 
     return GetBuilder<DashBordController>(builder: (_) {
       return dashBordController.userDetailsModel == null ||
@@ -88,11 +88,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                       .userDetailsModel!.data!.fullname!
                                       .toUpperCase()
                                   : "",
-                              // prefer.getString('name').toString(),
-                              // dashBordController.userDetailsModel!.data !=
-                              //         null
-                              //     ? dashBordController.userDetailsModel!.data!.fullname.toString()
-                              //     : 'ajay',
+                             
                               style: TextStyle(
                                   fontSize: 25,
                                   letterSpacing: 1.2,
@@ -290,8 +286,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                               null
                                           ? dashBordController
                                                   .counterCallingModel!
-                                                  .data![0]
-                                                  .counterNo! +
+                                                  .data![0].userCounter!
+                                            +
                                               "\n"
                                           : "",
                                       style: TextStyle(
@@ -305,7 +301,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: Colors.black,
                                         fontSize: 17),
                                   ),
-                                  // TextSpan(text: ' world!'),
                                 ],
                               ),
                             ),
@@ -326,8 +321,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                                   null
                                           ? dashBordController
                                                   .counterCallingModel!
-                                                  .data![1]
-                                                  .counterNo! +
+                                                  .data![0].corporateCounter!
+                                                  +
                                               "\n"
                                           : '',
                                       style: TextStyle(
@@ -342,7 +337,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         color: Colors.black,
                                         fontSize: 17),
                                   ),
-                                  // TextSpan(text: ' world!'),
+                                  TextSpan(text: ' world!'),
                                 ],
                               ),
                             ),

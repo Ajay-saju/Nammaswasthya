@@ -1,8 +1,4 @@
-
-
 import 'package:dio/dio.dart';
-
-
 import '../../../original_api/orginal_apis.dart';
 
 class GetUserProfileDetailsService{

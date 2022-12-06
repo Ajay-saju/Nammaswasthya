@@ -10,7 +10,7 @@ late SharedPreferences prefer;
 
 
 void main() async {
-  Future.delayed(Duration(milliseconds: 5), () async {
+  Future.delayed(Duration(milliseconds:1 ), () async {
     WidgetsFlutterBinding.ensureInitialized();
     prefer = await SharedPreferences.getInstance();
 
@@ -24,11 +24,12 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
+static bool launch = true;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     prefer.setBool('bio', false);
     
     precacheImage(
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
          visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SpalshScreen(),
+      home: 
+      SpalshScreen(),
       // home: login == null || login.isEmpty
       //     ? SpalshScreen()
       //     : BottumNavBarScreen()

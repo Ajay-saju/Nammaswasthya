@@ -1,8 +1,3 @@
-// To parse this JSON data, do
-//
-//     final homePageModelClass = homePageModelClassFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 HomePageModelClass homePageModelClassFromJson(String str) => HomePageModelClass.fromJson(json.decode(str));

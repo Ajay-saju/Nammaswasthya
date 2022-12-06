@@ -20,39 +20,53 @@ class UserProfileUpdateScreen extends StatefulWidget {
 }
 
 ProfileScreenController pcontroller = Get.find();
-// ProfilePickController pickController = Get.find();
-// ProfilePickController profilePickController = Get.find();
-final profilePickController = Get.put(ProfilePickController());
 
-final userUpdatecontroller = Get.put(UserUpdatecontroller());
-final ImagePicker picker = ImagePicker();
-
-initState() {
-  // pcontroller.getUserProfileDetails();
-}
-
-String name = pcontroller.getUserProfileDetails.value.data!.fullName.toString();
-String email = pcontroller.getUserProfileDetails.value.data!.email.toString();
-String phone_no =
-    pcontroller.getUserProfileDetails.value.data!.phoneNo.toString();
-String blood_group =
-    pcontroller.getUserProfileDetails.value.data!.bloodGroup.toString();
-String profile_pic =
-    pcontroller.getUserProfileDetails.value.data!.profilePic.toString();
-String dob = pcontroller.getUserProfileDetails.value.data!.dob.toString();
-String gender = pcontroller.getUserProfileDetails.value.data!.gender.toString();
-String occupation =
-    pcontroller.getUserProfileDetails.value.data!.occupation.toString();
-String state = pcontroller.getUserProfileDetails.value.data!.state.toString();
-String city = pcontroller.getUserProfileDetails.value.data!.city.toString();
-String pincode =
-    pcontroller.getUserProfileDetails.value.data!.pincode.toString();
+// String name2 =userUpdatecontroller.getUserProfileDetails.value.data!.fullName.toString();
 
 class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
+  final profilePickController = Get.put(ProfilePickController());
+  final userUpdatecontroller = Get.put(UserUpdatecontroller());
+  final ImagePicker picker = ImagePicker();
+  String name =
+      pcontroller.getUserProfileDetails.value.data!.fullName.toString();
+  String email = pcontroller.getUserProfileDetails.value.data!.email.toString();
+  String phone_no =
+      pcontroller.getUserProfileDetails.value.data!.phoneNo.toString();
+  String blood_group =
+      pcontroller.getUserProfileDetails.value.data!.bloodGroup.toString();
+  String profile_pic =
+      pcontroller.getUserProfileDetails.value.data!.profilePic.toString();
+  String dob = pcontroller.getUserProfileDetails.value.data!.dob.toString();
+  String gender =
+      pcontroller.getUserProfileDetails.value.data!.gender.toString();
+  String occupation =
+      pcontroller.getUserProfileDetails.value.data!.occupation.toString();
+  String state = pcontroller.getUserProfileDetails.value.data!.state.toString();
+  String city = pcontroller.getUserProfileDetails.value.data!.city.toString();
+  String pincode =
+      pcontroller.getUserProfileDetails.value.data!.pincode.toString();
+      
+  // String? valueChoose;
+  // List listItems = ['item1', 'item2', 'item3', 'item4', 'item5'];
   @override
   Widget build(BuildContext context) {
+    // final _userGender= gender;
+    // String newUserGender='';
+    // for (var i = 0; i < _userGender.length; i++) {
+    //   if(i==0){
+    //     newUserGender =_userGender[i].toUpperCase();
+    //   }else{
+    //     newUserGender = newUserGender+_userGender[i];
+    //   }
+    // }
+          
+
+    
     userUpdatecontroller.dob.text =
-        pcontroller.getUserProfileDetails.value.data!.dob.toString();
+        pcontroller.getUserProfileDetails.value.data!.dob == null ||
+                pcontroller.getUserProfileDetails.value.data!.dob == "null"
+            ? ''
+            : pcontroller.getUserProfileDetails.value.data!.dob.toString();
 
     return Scaffold(
       appBar: AppBar(
@@ -92,7 +106,6 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                         },
                         inputFormatters: [LengthLimitingTextInputFormatter(25)],
                         keyboardType: TextInputType.text,
-                        // controller: mebController.memName,
                         validator: (value) {
                           if (value!.isNotEmpty && value.length > 3) {
                             return null;
@@ -184,57 +197,38 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                             contentPadding: const EdgeInsets.only(left: 20.0)),
                       ),
                       h1,
-                      TextFormField(
-                        initialValue:
-                            blood_group == "null" ? 'Blood Group' : blood_group,
-                        onChanged: (value) {
-                          blood_group = value;
-                        },
-                        inputFormatters: [
-                          // LengthLimitingTextInputFormatter(10),
-                        ],
-                        keyboardType: TextInputType.text,
-                        // controller: mebController.memName,
-                        // validator: (value) {
-                        //   if (value!.isNotEmpty && value.length > 3) {
-                        //     return null;
-                        //   } else if (value.length < 3 && value.isNotEmpty) {
-                        //     return "Your Name Is Short";
-                        //   } else {
-                        //     return 'Required Name ';
-                        //   }
-                        // },
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: const BorderSide(color: Colors.black),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: const BorderSide(color: Colors.black),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: const BorderSide(color: Colors.grey),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            hintText: "Blood Group",
-                            hintStyle: TextStyle(
-                              fontFamily: "Nunito",
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: const EdgeInsets.only(left: 20.0)),
-                      ),
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 1),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: GetBuilder<UserUpdatecontroller>(
+                            builder: (_) {
+                              return DropdownButton<String>(
+                                  onTap: () => userUpdatecontroller
+                                      .isBloodGroupSelected = true,
+                                  underline: SizedBox(),
+                                  isExpanded: true,
+                                  hint: Text('Blood Group'),
+                                  value: userUpdatecontroller
+                                              .isBloodGroupSelected ==
+                                          false
+                                      ? blood_group
+                                      : userUpdatecontroller.bloodgroupSelect,
+                                  items: userUpdatecontroller.boodGroup
+                                      .map((item) => DropdownMenuItem<String>(
+                                          value: item, child: Text(item)))
+                                      .toList(),
+                                  onChanged: (item) {
+                                    userUpdatecontroller.bloodgroupSelect =
+                                        item;
+                                    userUpdatecontroller.update();
+                                    blood_group =
+                                        userUpdatecontroller.bloodgroupSelect!;
+                                  });
+                            },
+                          )),
+
                       h1,
                       GetBuilder<UserUpdatecontroller>(
                         builder: (_) {
@@ -307,13 +301,13 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                       ),
                       h1,
                       TextFormField(
-                        initialValue: gender == "null" ? 'Gender' : gender,
+                        initialValue: email == "null" ? '' : email,
                         onChanged: (value) {
-                          gender = value;
+                          email = value;
                         },
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(6),
-                        ],
+                        // inputFormatters: [
+                        //   LengthLimitingTextInputFormatter(6),
+                        // ],
                         keyboardType: TextInputType.text,
                         // controller: mebController.memName,
                         // validator: (value) {
@@ -348,7 +342,7 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                                 color: Colors.black,
                               ),
                             ),
-                            hintText: "Gender",
+                            hintText: "Email",
                             hintStyle: TextStyle(
                               fontFamily: "Nunito",
                             ),
@@ -357,9 +351,90 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                             contentPadding: const EdgeInsets.only(left: 20.0)),
                       ),
                       h1,
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius: BorderRadius.circular(15)),
+                        child: GetBuilder<UserUpdatecontroller>(
+                          builder: (_) {
+                            return DropdownButton<String>(
+                                onTap: () => userUpdatecontroller
+                                    .isGenderSelected = true,
+                                underline: SizedBox(),
+                                isExpanded: true,
+                                hint: Text('Gender'),
+                                value: 
+                                userUpdatecontroller.isGenderSelected ==
+                                        false
+                                    ? gender
+                                    :
+                                     userUpdatecontroller.genderSelect,
+                                items: userUpdatecontroller.gender
+                                    .map((item) => DropdownMenuItem<String>(
+                                        value: item, child: Text(item)))
+                                    .toList(),
+                                onChanged: (item) {
+                                  userUpdatecontroller.genderSelect = item;
+                                  userUpdatecontroller.update();
+                                  gender = userUpdatecontroller.genderSelect!;
+                                });
+                          },
+                        ),
+                      ),
+                      // TextFormField(
+                      //   initialValue: gender == "null" ? '' : gender,
+                      //   onChanged: (value) {
+                      //     gender = value;
+                      //   },
+                      //   inputFormatters: [
+                      //     LengthLimitingTextInputFormatter(6),
+                      //   ],
+                      //   keyboardType: TextInputType.text,
+                      //   // controller: mebController.memName,
+                      //   // validator: (value) {
+                      //   //   if (value!.isNotEmpty && value.length > 3) {
+                      //   //     return null;
+                      //   //   } else if (value.length < 3 && value.isNotEmpty) {
+                      //   //     return "Your Name Is Short";
+                      //   //   } else {
+                      //   //     return 'Required Name ';
+                      //   //   }
+                      //   // },
+                      //   decoration: InputDecoration(
+                      //       border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(15.0),
+                      //         borderSide: const BorderSide(color: Colors.black),
+                      //       ),
+                      //       enabledBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(15.0),
+                      //         borderSide: const BorderSide(color: Colors.black),
+                      //       ),
+                      //       errorBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(15.0),
+                      //         borderSide: const BorderSide(color: Colors.grey),
+                      //       ),
+                      //       focusedBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(15.0),
+                      //         borderSide: BorderSide(color: Colors.black),
+                      //       ),
+                      //       focusedErrorBorder: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(15.0),
+                      //         borderSide: BorderSide(
+                      //           color: Colors.black,
+                      //         ),
+                      //       ),
+                      //       hintText: "Gender",
+                      //       hintStyle: TextStyle(
+                      //         fontFamily: "Nunito",
+                      //       ),
+                      //       filled: true,
+                      //       fillColor: Colors.white,
+                      //       contentPadding: const EdgeInsets.only(left: 20.0)),
+                      // ),
+                      h1,
                       TextFormField(
-                        initialValue:
-                            occupation == "null" ? 'Occupation' : occupation,
+                        initialValue: occupation == "null" ? '' : occupation,
 
                         onChanged: (value) {
                           occupation = value;
@@ -411,7 +486,7 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                       ),
                       h1,
                       TextFormField(
-                        initialValue: state == "null" ? 'State' : state,
+                        initialValue: state == "null" ? '' : state,
 
                         onChanged: (value) {
                           state = value;
@@ -463,7 +538,7 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                       ),
                       h1,
                       TextFormField(
-                        initialValue: city == "null" ? 'City' : city,
+                        initialValue: city == "null" ? '' : city,
                         onChanged: (value) {
                           city = value;
                         },
@@ -514,7 +589,7 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                       ),
                       h1,
                       TextFormField(
-                        initialValue: pincode == "null" ? 'PinCode' : pincode,
+                        initialValue: pincode == "null" ? '' : pincode,
                         onChanged: (value) {
                           pincode = value;
                         },
@@ -570,60 +645,6 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                 TextButton(
                     onPressed: () {
                       Get.to(UpdateUserProfilePictureScreen());
-                      // Get.defaultDialog(
-                      //     content: Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 30),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //     children: [
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(8.0),
-                      //         child: ElevatedButton(
-                      //           onPressed: () async {
-                      //             final fImage = await picker.pickImage(
-                      //                 source: ImageSource.gallery);
-                      //             image = fImage!.path;
-                      //           },
-                      //           child: Text(
-                      //             'Gallery',
-                      //             style: TextStyle(
-                      //                 fontSize: 13,
-                      //                 fontWeight: FontWeight.bold),
-                      //           ),
-                      //           style: ElevatedButton.styleFrom(
-                      //               fixedSize: Size(80, 30),
-                      //               shape: RoundedRectangleBorder(
-                      //                   borderRadius:
-                      //                       BorderRadius.circular(10)),
-                      //               backgroundColor: appColor),
-                      //         ),
-                      //       ),
-                      //       Spacer(),
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(8.0),
-                      //         child: ElevatedButton(
-                      //           onPressed: () async {
-                      //             final fImage = await picker.pickImage(
-                      //                 source: ImageSource.camera);
-                      //             image = fImage!.path;
-                      //           },
-                      //           child: Text(
-                      //             'Camara',
-                      //             style: TextStyle(
-                      //                 fontSize: 13,
-                      //                 fontWeight: FontWeight.bold),
-                      //           ),
-                      //           style: ElevatedButton.styleFrom(
-                      //               fixedSize: Size(80, 30),
-                      //               shape: RoundedRectangleBorder(
-                      //                   borderRadius:
-                      //                       BorderRadius.circular(10)),
-                      //               backgroundColor: appColor),
-                      //         ),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ));
                     },
                     child: Text(
                       'Change Profile Picture',
@@ -660,8 +681,6 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    print(pincode);
-                                    print(state);
                                     userUpdatecontroller.updateUserProfile(
                                         name,
                                         email,
@@ -700,7 +719,9 @@ class _UserProfileUpdateScreenState extends State<UserProfileUpdateScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(1)),
                       backgroundColor: appColor),
-                )
+                ),
+                h2,
+                h2
               ],
             ),
           ),
